@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 
-class HomePage extends Component {
+class VerifierLoginPage extends Component {
+    componentDidMount() {
+        document.title = "Verifier Login";
+    }
+
     render() {
         let bg = window.location.origin + "/images/originals/city.jpg";
         return (
@@ -21,11 +25,9 @@ class HomePage extends Component {
                                     <div className="app-logo"></div>
                                     <h4 className="mb-0">
                                         <span className="d-block">
-                                            Welcome back,
+                                            Welcome message,
                                         </span>
-                                        <span>
-                                            Please sign in to your account.
-                                        </span>
+                                        <span>verify digital credentials</span>
                                     </h4>
                                     <div className="divider row"></div>
                                     <div>
@@ -37,12 +39,12 @@ class HomePage extends Component {
                                                             for="exampleEmail"
                                                             className=""
                                                         >
-                                                            Email
+                                                            URL Credential
                                                         </label>
                                                         <input
                                                             name="email"
                                                             id="exampleEmail"
-                                                            placeholder="Email here..."
+                                                            placeholder="URL Credential here..."
                                                             type="email"
                                                             className="form-control"
                                                         />
@@ -53,12 +55,12 @@ class HomePage extends Component {
                                                             for="examplePassword"
                                                             className=""
                                                         >
-                                                            Password
+                                                            Secret key
                                                         </label>
                                                         <input
                                                             name="password"
                                                             id="examplePassword"
-                                                            placeholder="Password here..."
+                                                            placeholder="Secret key here..."
                                                             type="password"
                                                             className="form-control"
                                                         />
@@ -68,14 +70,8 @@ class HomePage extends Component {
                                             <div className="divider row"></div>
                                             <div className="d-flex align-items-center">
                                                 <div className="ml-auto">
-                                                    <a
-                                                        href="/verifier-login"
-                                                        class="btn-lg btn btn-link"
-                                                    >
-                                                        Verifier Login
-                                                    </a>
                                                     <button className="btn btn-primary btn-lg">
-                                                        Login to Dashboard
+                                                        Verify
                                                     </button>
                                                 </div>
                                             </div>
@@ -91,4 +87,4 @@ class HomePage extends Component {
     }
 }
 
-export default HomePage;
+export default VerifierLoginPage;
