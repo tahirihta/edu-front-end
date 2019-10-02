@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 
 class HomePage extends Component {
+    gotoDashboard = () => {
+        this.props.history.push("/dashboard/admin");
+    };
+
     render() {
         let bg = window.location.origin + "/images/originals/city.jpg";
         return (
@@ -74,7 +78,12 @@ class HomePage extends Component {
                                                     >
                                                         Verifier Login
                                                     </a>
-                                                    <button className="btn btn-primary btn-lg">
+                                                    <button
+                                                        className="btn btn-primary btn-lg"
+                                                        onClick={
+                                                            this.gotoDashboard
+                                                        }
+                                                    >
                                                         Login to Dashboard
                                                     </button>
                                                 </div>
