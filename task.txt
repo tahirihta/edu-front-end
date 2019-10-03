@@ -1,0 +1,77 @@
+Here are some additional information ..
+
+A. List of the screen that we identified (Only For FrentEnd):
+
+1. Login page for three profiles (Admin University, Student a Verifier)
+1.1 (Admin University & Student) : https://wireframe.cc/F8VTlj
+1.2 Verifier: https://wireframe.cc/1lAEGT
+
+2. Admin University Dashboard. List of features: (https://wireframe.cc/N6A6EO)
+2.1 List of Credentials
+2.2 Add new Credential
+2.3 Add a new student
+2.4 Research (with filter): Program Name, Year, First/Last Name of Student
+2.5 Some statistics & News
+
+3. Student Dashboard. List of features: (https://wireframe.cc/uJ0Gt4)
+3.1 List of Diploma, List of Certification, List of Standards
+3.2 List of Publish Diploma,
+3.3 List of revoke Diploma
+3.3 Create a Publish Diploma for a beneficiary
+3.4 Revoke a Diploma for a beneficiary
+3.4 History of the event of each Credential
+
+B. Here are some inspiration links:
+https://github.com/coreui/coreui-free-react-admin-template
+https://github.com/devias-io/react-material-dashboard
+https://github.com/MacKentoch/react-director-admin-template
+https://github.com/flatlogic/react-dashboard
+https://github.com/flatlogic/react-material-admin
+https://github.com/creativetimofficial/material-dashboard-react
+
+C. No need for Rest API or Backend.
+
+Our Backend will be a Blockchain solution, No need de develop the Backend
+We de devloped an API with NodeJS, No need to develop an API
+
+The API is availaible at this URL:
+http://d24w27cd80vt93.cloudfront.net/api
+
+For the test you can use this command for you test:
+
+GET /student/list
+
+GET /student/get/:studentId
+
+POST /student/addStudent {
+"firstname":"Chakir",
+"lastname":"Al ghazali",
+"birthdate": "1984-09-09",
+"nationality": "Morroco"
+}
+
+GET /digCred/listAllByUniv/:universityId
+
+GET /digCred/list/:studentId
+
+GET /digCred/get/:digitalCredId
+
+POST /digCred/issue {
+"hashIpfs": "QmWnCctQqpde2HUUrHRq7qY5u8rWZkYw5xhqk5ZgTvdWsd",
+"studentId": "6c989c4e-5931-49b1-b89c-81c89e638cdb",
+"university": "univ1",
+"programName": "Bachelo of Philosopy",
+"attributionDate": "2019-09-02"
+}
+DELETE /digCred/revoke/:digitalCredId
+
+GET /shared
+
+GET /shared/listAll/:studentId
+
+GET /shared/get/:sharedId
+
+POST /shared/publish {
+"digitalCredId": "e71c83e1-6d49-4825-8f22-5350375c748b"
+}
+DELETE /shared/revoke/:sharedId

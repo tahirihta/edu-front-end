@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
-import BaseRouter from "./routes";
+import { renderRoutes } from 'react-router-config';
+import routes from './routes';
 
 class App extends Component {
     render() {
         return (
             <Router basename="/">
-                <BaseRouter />
+                {/* <BaseRouter /> */}
+                {renderRoutes(routes)}
             </Router>
         );
     }
