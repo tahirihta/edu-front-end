@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React from "react";
 
-class SidebarLayout extends React.Component {
+class StudentSidebarLayout extends React.Component {
     render() {
         return (
             <div>
@@ -170,21 +170,33 @@ class SidebarLayout extends React.Component {
                                             Dashboard
                                         </li>
                                         <li>
-                                            <a href="/dashboard/admin">
+                                            <a href="/dashboard/student">
                                                 <i className="metismenu-icon pe-7s-graph"></i>
                                                 Dashboard
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="/dashboard/admin/add-credential">
+                                            <a href="/dashboard/student/all-diploma">
                                                 <i className="metismenu-icon pe-7s-graph"></i>
-                                                Add Credential
+                                                All Diploma
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="/dashboard/admin/add-student">
+                                            <a href="/dashboard/student/all-publish-diploma">
                                                 <i className="metismenu-icon pe-7s-graph"></i>
-                                                Add New Student
+                                                All Publish Diploma
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/dashboard/student/all-revoke-diploma">
+                                                <i className="metismenu-icon pe-7s-graph"></i>
+                                                All Revoke Diploma
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/dashboard/student/all-certification">
+                                                <i className="metismenu-icon pe-7s-graph"></i>
+                                                All Certification
                                             </a>
                                         </li>
                                     </ul>
@@ -192,24 +204,6 @@ class SidebarLayout extends React.Component {
                             </div>
                         </div>
                         {this.props.children}
-                        {/* <div className="app-main__outer">
-                        <div className="app-main__inner">
-                            <div className="app-page-title">
-                                <div className="page-title-wrapper">
-                                    <div className="page-title-heading">
-                                        <div className="page-title-icon">
-                                            <i className="pe-7s-car icon-gradient bg-mean-fruit">
-                                            </i>
-                                        </div>
-                                        <div>Analytics Dashboard
-                                    <div className="page-title-subheading">This is an example dashboard created using build-in elements and components.
-                                    </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> */}
                     </div>
                 </div>
             </div>
@@ -217,4 +211,4 @@ class SidebarLayout extends React.Component {
     }
 }
 
-export default SidebarLayout;
+export default StudentSidebarLayout;

@@ -1,33 +1,91 @@
 /* eslint-disable react/no-multi-comp */
 /* eslint-disable react/display-name */
-import React, { lazy } from 'react';
-import { Redirect } from 'react-router-dom';
-import HomePage from './pages/HomePage';
-import AdminLayout from './pages/admindashboard/layouts/AdminLayout';
-import CreateCredentialPage from './pages/admindashboard/CreateCredentialPage';
+/* eslint-disable */
+import React, { lazy } from "react";
+import { Redirect } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import AdminLayout from "./pages/admindashboard/layouts/AdminLayout";
+import AdminDashboardPage from "./pages/admindashboard/AdminDashboardPage";
+import StudentDashboardPage from "./pages/studentdashboard/StudentDashboardPage";
+import StudentLayout from "./pages/studentdashboard/layouts/StudentLayout";
 
 const routes = [
     {
-        path: '/',
+        path: "/",
         exact: true,
         component: HomePage
     },
     {
-        path: '/dashboard/admin',
+        path: "/dashboard/admin",
         component: AdminLayout,
         routes: [
             {
-                path: '/dashboard/admin',
+                path: "/dashboard/admin",
                 exact: true,
-                component: AdminLayout
+                component: AdminDashboardPage
             },
             {
-                path: '/dashboard/admin/add-credential',
+                path: "/dashboard/admin/add-credential",
                 exact: true,
-                component: lazy(() => import('./pages/admindashboard/CreateCredentialPage'))
+                component: lazy(() =>
+                    import("./pages/admindashboard/CreateCredentialPage")
+                )
             },
+            {
+                path: "/dashboard/admin/add-student",
+                exact: true,
+                component: lazy(() =>
+                    import("./pages/admindashboard/CreateStudentPage")
+                )
+            }
         ]
     },
+    {
+        path: "/dashboard/student",
+        component: StudentLayout,
+        routes: [
+            {
+                path: "/dashboard/student",
+                exact: true,
+                component: StudentDashboardPage
+            },
+            {
+                path: "/dashboard/student/all-diploma",
+                exact: true,
+                component: lazy(() =>
+                    import("./pages/studentdashboard/AllDiplomaPage")
+                )
+            },
+            {
+                path: "/dashboard/student/all-publish-diploma",
+                exact: true,
+                component: lazy(() =>
+                    import("./pages/studentdashboard/ListPublishDiplomaPage")
+                )
+            },
+            {
+                path: "/dashboard/student/all-certification",
+                exact: true,
+                component: lazy(() =>
+                    import("./pages/studentdashboard/ListCertificationPage")
+                )
+            },
+            {
+                path: "/dashboard/student/all-standards",
+                exact: true,
+                component: lazy(() =>
+                    import("./pages/studentdashboard/ListStandardPage")
+                )
+            },
+            {
+                path: "/dashboard/student/all-revoke-diploma",
+                exact: true,
+                component: lazy(() =>
+                    import("./pages/studentdashboard/ListRevokeDiplomaPage")
+                )
+            }
+        ]
+    }
     //   {
     //     path: '/errors',
     //     component: ErrorLayout,

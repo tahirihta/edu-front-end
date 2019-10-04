@@ -1,18 +1,20 @@
 import React, { Component, Fragment, Suspense } from "react";
-import SidebarLayout from "./SidebarLayout";
 import { renderRoutes } from "react-router-config";
+import StudentSidebarLayout from "./StudentSidebarLayout";
 
-class AdminLayout extends Component {
+class StudentLayout extends Component {
     render() {
         const { route } = this.props;
         return (
             <Fragment>
                 <Suspense fallback={<h2>Loading...</h2>}>
-                    <SidebarLayout>{renderRoutes(route.routes)}</SidebarLayout>
+                    <StudentSidebarLayout>
+                        {renderRoutes(route.routes)}
+                    </StudentSidebarLayout>
                 </Suspense>
             </Fragment>
         );
     }
 }
 
-export default AdminLayout;
+export default StudentLayout;
