@@ -57,7 +57,7 @@ class SidebarLayout extends React.Component {
                                                         <i className="fa fa-angle-down ml-2 opacity-8"></i>
                                                     </a>
                                                     <div
-                                                        tabindex="-1"
+                                                        tabIndex="-1"
                                                         role="menu"
                                                         aria-hidden="true"
                                                         className="rm-pointers dropdown-menu-lg dropdown-menu dropdown-menu-right"
@@ -173,6 +173,12 @@ class SidebarLayout extends React.Component {
                                             <a href="/dashboard/admin">
                                                 <i className="metismenu-icon pe-7s-graph"></i>
                                                 Dashboard
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/dashboard/admin/all-students">
+                                                <i className="metismenu-icon pe-7s-graph"></i>
+                                                All Students
                                             </a>
                                         </li>
                                         <li>

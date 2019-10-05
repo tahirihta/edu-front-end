@@ -1,6 +1,31 @@
 import React, { Component } from 'react';
 
 class CreateCredentialPage extends Component {
+
+    state = {
+        sfirstname: "",
+        slastname: "",
+        sbirthdate: "",
+        modalIsOpen: false
+    };
+
+    componentDidMount() {
+        document.title = "Add New Credential";
+    };
+
+    onSearch = e => {
+        e.preventDefault();
+    };
+
+    openModal = e => {
+        this.setState({modalIsOpen: true});
+    };
+
+    hideModal = () => {
+        this.setState({ modalIsOpen: false });
+    }
+    
+
     render() {
         return (
             <div className="app-main__outer">
@@ -18,10 +43,49 @@ class CreateCredentialPage extends Component {
                             </div>
                         </div>
                     </div>
+                    {/* <ReactModal
+                        isOpen={this.state.modalIsOpen}
+                        style={customStyles}
+                        contentLabel="Example Modal"
+                        >
+                            <div className="row">
+                                <div className="col-md-12">
+                                    <div className="main-card mb-3 card">
+                                        <div className="card-body"><h5 className="card-title">Search Student</h5>
+                                            <form className="">
+                                                <div className="row">
+                                                    <div className="col-md-6">
+                                                        <div className="position-relative form-group">
+                                                            <label className="">First Name</label>
+                                                            <input name="sfirstname" placeholder="First Name" type="text" className="form-control" />
+                                                        </div>
+                                                    </div>
+                                                    <div className="col-md-6">
+                                                        <div className="position-relative form-group">
+                                                            <label className="">Last Name</label>
+                                                            <input name="slastname" placeholder="Last Name" type="text" className="form-control" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="row">
+                                                    <div className="col-md-6">
+                                                        <div className="position-relative form-group">
+                                                            <label className="">Bith date</label>
+                                                            <input name="sbirthdate" placeholder="dd/mm/yyyy" type="date" className="form-control" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <button className="mt-1 btn btn-success" onClick={this.onSearch}>Search</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </ReactModal> */}
                     <div className="row">
                         <div className="col-md-12">
                             <div className="main-card mb-3 card">
-                                <div className="card-body"><h5 className="card-title">Controls Types</h5>
+                                <div className="card-body"><h5 className="card-title">Create Digital Credential</h5>
                                     <form className="">
                                         <div className="row">
                                             <div className="col-md-6">
@@ -53,9 +117,9 @@ class CreateCredentialPage extends Component {
                                         </div>
                                         <div className="row">
                                             <div className="col-md-6">
-                                                <div class="position-relative form-group">
-                                                    <label for="exampleSelect" class="">Choose Program name</label>
-                                                    <select name="select" id="exampleSelect" class="form-control">
+                                                <div className="position-relative form-group">
+                                                    <label htmlFor="exampleSelect" className="">Choose Program name</label>
+                                                    <select name="select" id="exampleSelect" className="form-control">
                                                         <option selected>Choose Program</option>
                                                         <option>CSE</option>
                                                         <option>IT</option>
@@ -64,9 +128,9 @@ class CreateCredentialPage extends Component {
                                                 </div>
                                             </div>
                                             <div className="col-md-6">
-                                                <div class="position-relative form-group">
-                                                    <label for="exampleSelect" class="">Choose Student's Nationality</label>
-                                                    <select name="select" id="exampleSelect" class="form-control">
+                                                <div className="position-relative form-group">
+                                                    <label htmlFor="exampleSelect" className="">Choose Student's Nationality</label>
+                                                    <select name="select" id="exampleSelect" className="form-control">
                                                         <option selected>Choose Nationality</option>
                                                         <option>Bangladesh</option>
                                                         <option>USA</option>
@@ -77,15 +141,16 @@ class CreateCredentialPage extends Component {
                                         </div>
                                         <div className="row">
                                             <div className="col-md-12">
-                                                <div class="position-relative form-group">
-                                                    <label for="exampleFile" class="">File</label>
-                                                    <input name="file" id="exampleFile" type="file" class="form-control-file" />
-                                                    <small class="form-text text-muted">Add your file validation text here.</small>
+                                                <div className="position-relative form-group">
+                                                    <label htmlFor="exampleFile" className="">File</label>
+                                                    <input name="file" id="exampleFile" type="file" className="form-control-file" />
+                                                    <small className="form-text text-muted">Add your file validation text here.</small>
                                                 </div>
                                             </div>
                                         </div>
-                                        <button class="mt-1 btn btn-primary">Submit</button>
+                                        <button className="mt-1 btn btn-primary">Submit</button>
                                     </form>
+                                    <button className="mt-1 btn btn-success" data-toggle="modal" data-target="#exampleModal">Search</button>
                                 </div>
                             </div>
                         </div>
