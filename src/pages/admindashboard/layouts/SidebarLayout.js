@@ -182,6 +182,12 @@ class SidebarLayout extends React.Component {
                                             </a>
                                         </li>
                                         <li>
+                                            <a href="/dashboard/admin/all-credentials">
+                                                <i className="metismenu-icon pe-7s-graph"></i>
+                                                All Credentials
+                                            </a>
+                                        </li>
+                                        <li>
                                             <a href="/dashboard/admin/add-credential">
                                                 <i className="metismenu-icon pe-7s-graph"></i>
                                                 Add Credential

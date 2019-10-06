@@ -32,6 +32,13 @@ const routes = [
                 )
             },
             {
+                path: "/dashboard/admin/all-credentials",
+                exact: true,
+                component: lazy(() =>
+                    import("./pages/admindashboard/ListCredentialPage")
+                )
+            },
+            {
                 path: "/dashboard/admin/add-credential",
                 exact: true,
                 component: lazy(() =>

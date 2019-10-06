@@ -23,8 +23,6 @@ class CreateStudentPage extends Component {
     onSubmit = (e) => {
         e.preventDefault();
 
-        console.log(this.state);
-
         const data = {
             "firstname": this.state.firstname,
             "lastname": this.state.lastname,

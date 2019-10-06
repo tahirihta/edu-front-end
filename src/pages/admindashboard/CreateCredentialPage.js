@@ -1,11 +1,23 @@
 import React, { Component } from 'react';
+import {
+    Row, Col,
+} from 'reactstrap';
+import StudentSearchModal from '../../components/StudentSearchModal';
+import { connect } from 'react-redux';
+import Axios from 'axios';
+import toastr from 'toastr';
+
 
 class CreateCredentialPage extends Component {
 
     state = {
-        sfirstname: "",
-        slastname: "",
-        sbirthdate: "",
+        firstname: "",
+        lastname: "",
+        birthdate: "",
+        studentId: "",
+        university: "",
+        programName: "",
+        attributionDate: "",
         modalIsOpen: false
     };
 
@@ -13,152 +25,113 @@ class CreateCredentialPage extends Component {
         document.title = "Add New Credential";
     };
 
-    onSearch = e => {
-        e.preventDefault();
-    };
+    UNSAFE_componentWillReceiveProps(nextProps) {
+        this.setState({
+            studentId: nextProps.student.student.studentid,
+        });
+    }
 
-    openModal = e => {
+    onSubmit = e => {
+        e.preventDefault();
+
+        console.log(this.state);
+        
+        if(this.state.studentId && this.state.university && this.state.attributionDate && this.state.programName) {
+            Axios.post("http://d24w27cd80vt93.cloudfront.net/api/digCred/issue", {
+                "studentId": this.state.studentId,
+                "university": this.state.university,
+                "programName": this.state.programName,
+                "attributionDate": this.state.attributionDate
+            })
+            .then(res => toastr.success("Credential successfully created!"))
+            .catch(err => toastr.success("Someting wrong! Please check your inputs."));
+        } else {
+            toastr.warning("All fields are mandatory");
+        }
+    }
+
+    openSearchModal = e => {
         this.setState({modalIsOpen: true});
     };
 
     hideModal = () => {
         this.setState({ modalIsOpen: false });
     }
-    
+
+    onChange = (e) => this.setState({[e.target.name]: e.target.value});
 
     render() {
         return (
-            <div className="app-main__outer">
-                <div className="app-main__inner">
-                    <div className="app-page-title">
-                        <div className="page-title-wrapper">
-                            <div className="page-title-heading">
-                                <div className="page-title-icon">
-                                    <i className="pe-7s-car icon-gradient bg-mean-fruit">
-                                    </i>
-                                </div>
-                                <div>
-                                    Add New Digital Credential
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {/* <ReactModal
-                        isOpen={this.state.modalIsOpen}
-                        style={customStyles}
-                        contentLabel="Example Modal"
-                        >
-                            <div className="row">
-                                <div className="col-md-12">
-                                    <div className="main-card mb-3 card">
-                                        <div className="card-body"><h5 className="card-title">Search Student</h5>
-                                            <form className="">
-                                                <div className="row">
-                                                    <div className="col-md-6">
-                                                        <div className="position-relative form-group">
-                                                            <label className="">First Name</label>
-                                                            <input name="sfirstname" placeholder="First Name" type="text" className="form-control" />
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-md-6">
-                                                        <div className="position-relative form-group">
-                                                            <label className="">Last Name</label>
-                                                            <input name="slastname" placeholder="Last Name" type="text" className="form-control" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="row">
-                                                    <div className="col-md-6">
-                                                        <div className="position-relative form-group">
-                                                            <label className="">Bith date</label>
-                                                            <input name="sbirthdate" placeholder="dd/mm/yyyy" type="date" className="form-control" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <button className="mt-1 btn btn-success" onClick={this.onSearch}>Search</button>
-                                            </form>
-                                        </div>
+            <>
+                <div className="app-main__outer">
+                    <div className="app-main__inner">
+                        <div className="app-page-title">
+                            <div className="page-title-wrapper">
+                                <div className="page-title-heading">
+                                    <div className="page-title-icon">
+                                        <i className="pe-7s-car icon-gradient bg-mean-fruit">
+                                        </i>
+                                    </div>
+                                    <div>
+                                        Add New Digital Credential
                                     </div>
                                 </div>
                             </div>
-                    </ReactModal> */}
-                    <div className="row">
-                        <div className="col-md-12">
-                            <div className="main-card mb-3 card">
-                                <div className="card-body"><h5 className="card-title">Create Digital Credential</h5>
-                                    <form className="">
-                                        <div className="row">
-                                            <div className="col-md-6">
-                                                <div className="position-relative form-group">
-                                                    <label htmlFor="exampleEmail" className="">First Name</label>
-                                                    <input name="email" id="exampleEmail" placeholder="First Name" type="email" className="form-control" />
+                        </div>
+                        <div className="row">
+                            <div className="col-md-12">
+                                <div className="main-card mb-3 card">
+                                    <div className="card-body"><h5 className="card-title">Create Digital Credential</h5>
+                                        <form className="">
+                                            <div className="row">
+                                                <div className="col-md-6">
+                                                    <div className="position-relative form-group">
+                                                        <label className="">Student Id</label>
+                                                        <input name="studentId" required defaultValue={this.state.studentId} readOnly placeholder="Student Id" type="text" className="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div className="col-md-6">
+                                                    <div className="position-relative form-group">
+                                                        <label className="">University</label>
+                                                        <input name="university" onChange={this.onChange} required defaultValue={this.state.university} placeholder="University" type="text" className="form-control" />
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div className="col-md-6">
-                                                <div className="position-relative form-group">
-                                                    <label htmlFor="exampleEmail" className="">Last Name</label>
-                                                    <input name="email" id="exampleEmail" placeholder="Last Name" type="email" className="form-control" />
+                                            <div className="row">
+                                                <div className="col-md-6">
+                                                    <div className="position-relative form-group">
+                                                        <label className="">Attribution date</label>
+                                                        <input name="attributionDate" onChange={this.onChange} required defaultValue={this.state.attributionDate} placeholder="dd/mm/yyyy" type="date" className="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div className="col-md-6">
+                                                    <div className="position-relative form-group">
+                                                        <label className="">Program Name</label>
+                                                        <input name="programName" onChange={this.onChange} required defaultValue={this.state.programName} placeholder="Program Name" type="text" className="form-control" />
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div className="row">
-                                            <div className="col-md-6">
-                                                <div className="position-relative form-group">
-                                                    <label htmlFor="exampleEmail" className="">Bith date</label>
-                                                    <input name="datte" id="exampleEmail" placeholder="dd/mm/yyyy" type="date" className="form-control" />
-                                                </div>
-                                            </div>
-                                            <div className="col-md-6">
-                                                <div className="position-relative form-group">
-                                                    <label htmlFor="exampleEmail" className="">Score</label>
-                                                    <input name="email" id="exampleEmail" placeholder="Score" type="email" className="form-control" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="row">
-                                            <div className="col-md-6">
-                                                <div className="position-relative form-group">
-                                                    <label htmlFor="exampleSelect" className="">Choose Program name</label>
-                                                    <select name="select" id="exampleSelect" className="form-control">
-                                                        <option selected>Choose Program</option>
-                                                        <option>CSE</option>
-                                                        <option>IT</option>
-                                                        <option>BCS</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div className="col-md-6">
-                                                <div className="position-relative form-group">
-                                                    <label htmlFor="exampleSelect" className="">Choose Student's Nationality</label>
-                                                    <select name="select" id="exampleSelect" className="form-control">
-                                                        <option selected>Choose Nationality</option>
-                                                        <option>Bangladesh</option>
-                                                        <option>USA</option>
-                                                        <option>Canada</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="row">
-                                            <div className="col-md-12">
-                                                <div className="position-relative form-group">
-                                                    <label htmlFor="exampleFile" className="">File</label>
-                                                    <input name="file" id="exampleFile" type="file" className="form-control-file" />
-                                                    <small className="form-text text-muted">Add your file validation text here.</small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <button className="mt-1 btn btn-primary">Submit</button>
-                                    </form>
-                                    <button className="mt-1 btn btn-success" data-toggle="modal" data-target="#exampleModal">Search</button>
+                                            <button className="mt-1 btn btn-primary" onClick={this.onSubmit}>Save</button>
+                                        </form>
+                                        <button type="submit" className="mt-1 btn btn-success" onClick={this.openSearchModal}>Search</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <Row className="text-center">
+                            <Col md="12">
+                                <StudentSearchModal modalIsOpen={this.state.modalIsOpen}/>
+                            </Col>
+                        </Row>
                     </div>
                 </div>
-            </div>
+            </>
         );
     }
-}
+};
 
-export default CreateCredentialPage;
+const mapStateToProps = state => ({
+    student: state.student
+});
+
+export default connect(mapStateToProps, { })(CreateCredentialPage);

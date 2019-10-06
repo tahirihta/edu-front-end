@@ -1,37 +1,51 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import axios from "axios";
+import toastr from 'toastr';
 
-class ListStudentPage extends Component {
+class ListCredentialPage extends Component {
+
     state = {
-        students: []
+        credentials: []
     };
 
     async componentDidMount() {
-        document.title = "List of students";
+        document.title = "List of credentials";
 
-        // axios
-        //     .get("http://d24w27cd80vt93.cloudfront.net/api/student/list")
-        //     .then(res => this.setState({ students: res.data }))
-        //     .catch(err => console.log(err));
-
-        let res = axios.get(
-            "http://d24w27cd80vt93.cloudfront.net/api/student/list"
+        let res = axios.post(
+            "http://d24w27cd80vt93.cloudfront.net/api/digCred/search"
         );
         let { data } = await res;
-        this.setState({ students: data });
+        this.setState({ credentials: data });
+    };
+
+    onRevoke = (id) => e => {
+        console.log(id);
+        axios.delete("http://d24w27cd80vt93.cloudfront.net/api/digCred/revoke/c86becb2-b778-44e6-a338-9e4203603cc6")
+            .then(res => {
+                this.setState({
+                    credentials: this.state.credentials.filter(item => {
+                        return item.digitalcredid !== id;
+                    })
+                })
+                toastr.success("Credential successfully revoked");
+            })
+            .catch(err => toastr.warning("Something wrong! Please try again later."))
     }
 
     render() {
-        const studentsTable = this.state.students.map((student, index) => {
+        const credentialsTable = this.state.credentials.map((credential, index) => {
             return (
-                <tr>
-                    <th scope="row">{student.studentid}</th>
-                    <td>{student.firstname}</td>
-                    <td>{student.lastname}</td>
-                    <td>{student.email}</td>
-                    <td>{student.nationality}</td>
-                    <td>{student.postaladress}</td>
-                    <td>{student.nic}</td>
+                <tr key={index}>
+                    <th scope="row">{credential.digitalcredid}</th>
+                    <td>{credential.firstname}</td>
+                    <td>{credential.lastname}</td>
+                    <td>{credential.email}</td>
+                    <td>{credential.programname}</td>
+                    <td>{credential.postaladress}</td>
+                    <td>{credential.nic}</td>
+                    <td>
+                        <button type="button" className="btn btn-primary" onClick={this.onRevoke(credential.digitalcredid)}>Revoke</button>
+                    </td>
                 </tr>
             );
         });
@@ -45,7 +59,7 @@ class ListStudentPage extends Component {
                                 <div className="page-title-icon">
                                     <i className="pe-7s-car icon-gradient bg-mean-fruit"></i>
                                 </div>
-                                <div>All Students</div>
+                                <div>All Credentials</div>
                             </div>
                         </div>
                     </div>
@@ -54,7 +68,7 @@ class ListStudentPage extends Component {
                             <div className="main-card mb-3 card">
                                 <div className="card-body">
                                     <h5 className="card-title">
-                                        List of students
+                                        List of credentials
                                     </h5>
                                     <table
                                         id="example"
@@ -62,16 +76,17 @@ class ListStudentPage extends Component {
                                     >
                                         <thead>
                                             <tr>
-                                                <th>#Id</th>
+                                                <th>#Digital Id</th>
                                                 <th>First Name</th>
                                                 <th>Last Name</th>
                                                 <th>Email</th>
-                                                <th>Nationality</th>
+                                                <th>Program Name</th>
                                                 <th>Postal Address</th>
                                                 <th>NIC</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
-                                        <tbody>{studentsTable}</tbody>
+                                        <tbody>{credentialsTable}</tbody>
                                     </table>
                                 </div>
                             </div>
@@ -83,4 +98,4 @@ class ListStudentPage extends Component {
     }
 }
 
-export default ListStudentPage;
+export default ListCredentialPage;
