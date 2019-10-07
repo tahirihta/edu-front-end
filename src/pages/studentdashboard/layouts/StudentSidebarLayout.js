@@ -57,7 +57,7 @@ class StudentSidebarLayout extends React.Component {
                                                         <i className="fa fa-angle-down ml-2 opacity-8"></i>
                                                     </a>
                                                     <div
-                                                        tabindex="-1"
+                                                        tabIndex="-1"
                                                         role="menu"
                                                         aria-hidden="true"
                                                         className="rm-pointers dropdown-menu-lg dropdown-menu dropdown-menu-right"
