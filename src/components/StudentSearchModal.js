@@ -61,7 +61,6 @@ class StudentSearchModal extends React.Component {
     }
 
     render() {
-        // console.log(this.props.modalIsOpen);
         return (
             <span className="d-inline-block mb-2 mr-2">
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
