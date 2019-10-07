@@ -1,8 +1,30 @@
 import React, { Component } from "react";
+import toastr from 'toastr';
+import axios from 'axios';
 
 class VerifierLoginPage extends Component {
     componentDidMount() {
-        document.title = "Verifier Login";
+        document.title = "Shared credential verifier";
+    };
+
+    state = {
+        sharedId: "",
+        secretKey: ""
+    };
+
+    onChange = (e) => this.setState({[e.target.name]: e.target.value});
+
+    onSubmit = e => {
+        e.preventDefault();
+
+        const data = {
+            sharedId: this.state.sharedId,
+            secretKey: this.state.secretKey,
+        };
+
+        axios.post("http://d24w27cd80vt93.cloudfront.net/api/shared/verify", data)
+            .then(res => toastr.success("Successfully verified"))
+            .catch(err => toastr.error("Something went wrong!"));
     }
 
     render() {
@@ -27,7 +49,7 @@ class VerifierLoginPage extends Component {
                                         <span className="d-block">
                                             Welcome message,
                                         </span>
-                                        <span>verify digital credentials</span>
+                                        <span>Verify digital credentials</span>
                                     </h4>
                                     <div className="divider row"></div>
                                     <div>
@@ -36,33 +58,31 @@ class VerifierLoginPage extends Component {
                                                 <div className="col-md-12">
                                                     <div className="position-relative form-group">
                                                         <label
-                                                            for="exampleEmail"
                                                             className=""
                                                         >
-                                                            URL Credential
+                                                            Shared Id
                                                         </label>
                                                         <input
-                                                            name="email"
-                                                            id="exampleEmail"
-                                                            placeholder="URL Credential here..."
-                                                            type="email"
+                                                            name="sharedId"
+                                                            placeholder="Shared Id here..."
+                                                            type="text"
                                                             className="form-control"
+                                                            onChange={this.onChange}
                                                         />
                                                     </div>
 
                                                     <div className="position-relative form-group">
                                                         <label
-                                                            for="examplePassword"
                                                             className=""
                                                         >
                                                             Secret key
                                                         </label>
                                                         <input
-                                                            name="password"
-                                                            id="examplePassword"
+                                                            name="secretKey"
                                                             placeholder="Secret key here..."
-                                                            type="password"
+                                                            type="text"
                                                             className="form-control"
+                                                            onChange={this.onChange}
                                                         />
                                                     </div>
                                                 </div>
@@ -70,7 +90,7 @@ class VerifierLoginPage extends Component {
                                             <div className="divider row"></div>
                                             <div className="d-flex align-items-center">
                                                 <div className="ml-auto">
-                                                    <button className="btn btn-primary btn-lg">
+                                                    <button className="btn btn-primary btn-lg" onClick={this.onSubmit}>
                                                         Verify
                                                     </button>
                                                 </div>

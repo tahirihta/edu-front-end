@@ -8,6 +8,7 @@ import AdminLayout from "./pages/admindashboard/layouts/AdminLayout";
 import AdminDashboardPage from "./pages/admindashboard/AdminDashboardPage";
 import StudentDashboardPage from "./pages/studentdashboard/StudentDashboardPage";
 import StudentLayout from "./pages/studentdashboard/layouts/StudentLayout";
+import VerifierLoginPage from "./pages/VerifierLoginPage";
 
 const routes = [
     {
@@ -53,6 +54,11 @@ const routes = [
                 )
             }
         ]
+    },
+    {
+        path: "/verifier-login",
+        exact: true,
+        component: VerifierLoginPage
     },
     {
         path: "/dashboard/student",
