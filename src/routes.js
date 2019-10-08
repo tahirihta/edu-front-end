@@ -9,6 +9,7 @@ import AdminDashboardPage from "./pages/admindashboard/AdminDashboardPage";
 import StudentDashboardPage from "./pages/studentdashboard/StudentDashboardPage";
 import StudentLayout from "./pages/studentdashboard/layouts/StudentLayout";
 import VerifierLoginPage from "./pages/VerifierLoginPage";
+import StudentLoginPage from "./pages/StudentLoginPage";
 
 const routes = [
     {
@@ -59,6 +60,11 @@ const routes = [
         path: "/verifier-login",
         exact: true,
         component: VerifierLoginPage
+    },
+    {
+        path: "/student/login",
+        exact: true,
+        component: StudentLoginPage
     },
     {
         path: "/dashboard/student",

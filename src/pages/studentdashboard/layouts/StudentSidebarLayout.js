@@ -1,7 +1,24 @@
 /* eslint-disable */
 import React from "react";
+import { withRouter, Link } from "react-router-dom";
 
 class StudentSidebarLayout extends React.Component {
+    state = {
+        student: null
+    };
+
+    componentDidMount() {
+        if (localStorage.studentInfo) {
+            const student = JSON.parse(localStorage.studentInfo);
+            this.setState({ student: student });
+        }
+    }
+
+    onLogin = () => {
+        localStorage.removeItem("studentInfo");
+        this.props.history.push("/student/login");
+    };
+
     render() {
         return (
             <div>
@@ -40,79 +57,17 @@ class StudentSidebarLayout extends React.Component {
                                 <div className="header-btn-lg pr-0">
                                     <div className="widget-content p-0">
                                         <div className="widget-content-wrapper">
-                                            <div className="widget-content-left">
-                                                <div className="btn-group">
-                                                    <a
-                                                        data-toggle="dropdown"
-                                                        aria-haspopup="true"
-                                                        aria-expanded="false"
-                                                        className="p-0 btn"
-                                                    >
-                                                        <img
-                                                            width="42"
-                                                            className="rounded-circle"
-                                                            src="assets/images/avatars/1.jpg"
-                                                            alt=""
-                                                        />
-                                                        <i className="fa fa-angle-down ml-2 opacity-8"></i>
-                                                    </a>
-                                                    <div
-                                                        tabIndex="-1"
-                                                        role="menu"
-                                                        aria-hidden="true"
-                                                        className="rm-pointers dropdown-menu-lg dropdown-menu dropdown-menu-right"
-                                                    >
-                                                        <div className="dropdown-menu-header">
-                                                            <div className="dropdown-menu-header-inner bg-info">
-                                                                <div
-                                                                    className="menu-header-image opacity-2"
-                                                                    style={{
-                                                                        backgroundImage:
-                                                                            "url('assets/images/dropdown-header/city3.jpg')"
-                                                                    }}
-                                                                ></div>
-                                                                <div className="menu-header-content text-left">
-                                                                    <div className="widget-content p-0">
-                                                                        <div className="widget-content-wrapper">
-                                                                            <div className="widget-content-left mr-3">
-                                                                                <img
-                                                                                    width="42"
-                                                                                    className="rounded-circle"
-                                                                                    src="assets/images/avatars/1.jpg"
-                                                                                    alt=""
-                                                                                />
-                                                                            </div>
-                                                                            <div className="widget-content-left">
-                                                                                <div className="widget-heading">
-                                                                                    Alina
-                                                                                    Mcloughlin
-                                                                                </div>
-                                                                                <div className="widget-subheading opacity-8">
-                                                                                    A
-                                                                                    short
-                                                                                    profile
-                                                                                    description
-                                                                                </div>
-                                                                            </div>
-                                                                            <div className="widget-content-right mr-2">
-                                                                                <button className="btn-pill btn-shadow btn-shine btn btn-focus">
-                                                                                    Logout
-                                                                                </button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
                                             <div className="widget-content-left  ml-3 header-user-info">
                                                 <div className="widget-heading">
-                                                    Alina Mclourd
+                                                    {this.state.student &&
+                                                        this.state.student
+                                                            .firstname +
+                                                            " " +
+                                                            this.state.student
+                                                                .lastname}
                                                 </div>
                                                 <div className="widget-subheading">
-                                                    VP People Manager
+                                                    Student
                                                 </div>
                                             </div>
                                         </div>
@@ -199,6 +154,15 @@ class StudentSidebarLayout extends React.Component {
                                                 All Certification
                                             </a>
                                         </li>
+                                        <li>
+                                            <a
+                                                onClick={this.onLogin}
+                                                style={{ cursor: "pointer" }}
+                                            >
+                                                <i className="metismenu-icon pe-7s-graph"></i>
+                                                Logout
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -211,4 +175,4 @@ class StudentSidebarLayout extends React.Component {
     }
 }
 
-export default StudentSidebarLayout;
+export default withRouter(StudentSidebarLayout);

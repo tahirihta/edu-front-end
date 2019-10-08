@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import Axios from "axios";
 import toastr from "toastr";
 
-class HomePage extends Component {
+class StudentLoginPage extends Component {
     componentDidMount() {
-        document.title = "Admin login";
+        document.title = "Student login";
 
         if (localStorage.adminSessionToken) {
-            this.props.history.push("/dashboard/admin");
+            this.props.history.push("/dashboard/student");
         }
     }
 
@@ -28,14 +28,16 @@ class HomePage extends Component {
 
         if (this.state.loginid && this.state.password) {
             Axios.post(
-                "http://d24w27cd80vt93.cloudfront.net/api/login/univ",
+                "http://d24w27cd80vt93.cloudfront.net/api/login/std",
                 data
             )
                 .then(res => {
                     toastr.success("Successfully logged in");
-                    localStorage.setItem("adminSessionToken", res.data[1]);
-                    localStorage.setItem("adminName", res.data[0]);
-                    this.props.history.push("/dashboard/admin");
+                    localStorage.setItem(
+                        "studentInfo",
+                        JSON.stringify(res.data[0])
+                    );
+                    this.props.history.push("/dashboard/student");
                 })
                 .catch(err => console.log(err));
         } else {
@@ -115,10 +117,10 @@ class HomePage extends Component {
                                                         Verifier Login
                                                     </a>
                                                     <a
-                                                        href="/student/login"
+                                                        href="/"
                                                         className="btn-lg btn btn-link"
                                                     >
-                                                        Student Login
+                                                        Admin Login
                                                     </a>
                                                     <button
                                                         className="btn btn-primary btn-lg"
@@ -140,4 +142,4 @@ class HomePage extends Component {
     }
 }
 
-export default HomePage;
+export default StudentLoginPage;

@@ -24,7 +24,7 @@ class ListStudentPage extends Component {
     render() {
         const studentsTable = this.state.students.map((student, index) => {
             return (
-                <tr>
+                <tr key={index}>
                     <th scope="row">{student.studentid}</th>
                     <td>{student.firstname}</td>
                     <td>{student.lastname}</td>
