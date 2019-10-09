@@ -19,7 +19,6 @@ class ListCredentialPage extends Component {
     };
 
     onRevoke = (id) => e => {
-        console.log(id);
         axios.delete("http://d24w27cd80vt93.cloudfront.net/api/digCred/revoke/c86becb2-b778-44e6-a338-9e4203603cc6")
             .then(res => {
                 this.setState({

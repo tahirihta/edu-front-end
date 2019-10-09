@@ -14,10 +14,9 @@ class AllDiplomaPage extends Component {
             .then(res => {
                 this.setState({
                     diplomas: res.data.filter(
-                        x => x.type_digital_credential === "DIPLOMA"
+                        x => x.type_digital_credential === "DIPLOMA" || x.type_digital_credential === "Diploma"
                     )
                 });
-                console.log(this.state.diplomas);
             })
             .catch(err => toastr.warning("Something wrong!"));
     }

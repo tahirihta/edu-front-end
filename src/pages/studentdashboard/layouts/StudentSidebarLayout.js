@@ -155,6 +155,12 @@ class StudentSidebarLayout extends React.Component {
                                             </a>
                                         </li>
                                         <li>
+                                            <a href="/dashboard/student/all-standards">
+                                                <i className="metismenu-icon pe-7s-graph"></i>
+                                                All Standards
+                                            </a>
+                                        </li>
+                                        <li>
                                             <a
                                                 onClick={this.onLogin}
                                                 style={{ cursor: "pointer" }}

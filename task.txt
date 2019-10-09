@@ -75,3 +75,61 @@ POST /shared/publish {
 "digitalCredId": "e71c83e1-6d49-4825-8f22-5350375c748b"
 }
 DELETE /shared/revoke/:sharedId
+
+
+1) For University administrators
+
+
+POST http://d24w27cd80vt93.cloudfront.net/api/login/univ
+{
+"loginid":"admin_univ1",
+"password": "ipsum"
+}
+
+Existent users : admin_univ1 and admin_univ2 and password is "ipsum"
+
+Output :
+
+
+[
+"univ1",
+"6e0f3034370203ca3135c1e90de1067f01089b83b0428fab9ae2894630619c72"
+]
+
+[universityId,sessionToken]
+
+
+2)Login Student
+
+
+POST http://d24w27cd80vt93.cloudfront.net/api/login/std
+
+{
+"loginid":"georgysayco1990-07-12",
+"password":"ipsum"
+}
+
+
+For our examples
+
+loginid = (firstname.toLowerCase()+lastname.toLowerCase()+birthdate).replace(" ","-") et password=ipsum
+
+
+
+Output
+
+[{
+"studentid": "01ba8c40-1f09-436b-b345-41eede4151c7",
+"firstname": "georgy",
+"lastname": "sayco",
+"birthdate": "1990-07-12T00:00:00.000Z",
+"nationality": "French",
+"email": "hamidemag@yahoo.fr",
+"postaladress": "city code postal state",
+"nic": "JKQ98928?KJ",
+"loginid": "georgysayco1990-07-12",
+"password": "697073756D"
+}]
+
+
+to get loginid of a student : http://d24w27cd80vt93.cloudfront.net/api/student/list
