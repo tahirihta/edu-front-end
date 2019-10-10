@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import Axios from "axios";
 import toastr from "toastr";
+import { MDBDataTable } from 'mdbreact';
+import { columns } from "../../columns";
 
 class ListPublishDiplomaPage extends Component {
     state = {
-        diplomas: []
+        diplomas: [],
+        rows: []
     };
 
     componentDidMount() {
@@ -21,19 +24,22 @@ class ListPublishDiplomaPage extends Component {
             .catch(err => toastr.warning("Something wrong!"));
     }
     render() {
-        const diplomasTable = this.state.diplomas.map((diploma, index) => {
-            return (
-                <tr key={index}>
-                    <th scope="row">{diploma.digitalcredid}</th>
-                    <td>{diploma.firstname}</td>
-                    <td>{diploma.lastname}</td>
-                    <td>{diploma.email}</td>
-                    <td>{diploma.programname}</td>
-                    <td>{diploma.postaladress}</td>
-                    <td>{diploma.nic}</td>
-                </tr>
-            );
+
+        this.state.diplomas.forEach((value, index) => {
+            this.state.rows.push({
+                digitalcredid: value.digitalcredid,
+                firstname: value.firstname,
+                lastname: value.lastname,
+                email: value.email,
+                programname: value.programname,
+                postaladress: value.postaladress,
+                nic: value.nic,
+            })
         });
+        const data = {
+            columns: columns,
+            rows: this.state.rows
+        };
 
         return (
             <div className="app-main__outer">
@@ -55,23 +61,12 @@ class ListPublishDiplomaPage extends Component {
                                     <h5 className="card-title">
                                         List of Publish diplomas
                                     </h5>
-                                    <table
-                                        id="example"
-                                        className="mb-0 table table-striped"
-                                    >
-                                        <thead>
-                                            <tr>
-                                                <th>#Digital Id</th>
-                                                <th>First Name</th>
-                                                <th>Last Name</th>
-                                                <th>Email</th>
-                                                <th>Program Name</th>
-                                                <th>Postal Address</th>
-                                                <th>NIC</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>{diplomasTable}</tbody>
-                                    </table>
+                                    <MDBDataTable
+                                        striped
+                                        bordered
+                                        hover
+                                        data={data}
+                                        />
                                 </div>
                             </div>
                         </div>

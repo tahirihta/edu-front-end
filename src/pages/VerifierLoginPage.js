@@ -22,9 +22,13 @@ class VerifierLoginPage extends Component {
             secretKey: this.state.secretKey,
         };
 
-        axios.post("http://d24w27cd80vt93.cloudfront.net/api/shared/verify", data)
-            .then(res => toastr.success("Successfully verified"))
-            .catch(err => toastr.error("Something went wrong!"));
+        if(this.state.sharedId && this.state.secretKey) {
+            axios.post("http://d24w27cd80vt93.cloudfront.net/api/shared/verify", data)
+                .then(res => toastr.success("Successfully verified"))
+                .catch(err => toastr.error("Something went wrong!"));
+        } else {
+            toastr.success("All fields are mandatory")
+        }
     }
 
     render() {

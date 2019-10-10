@@ -1,6 +1,7 @@
 // eslint-disable-next-line
 import React, { Component } from "react";
 import axios from 'axios';
+import toastr from 'toastr';
 
 class CreateStudentPage extends Component {
 
@@ -34,8 +35,8 @@ class CreateStudentPage extends Component {
         }
 
         axios.post("http://d24w27cd80vt93.cloudfront.net/api/student/addStudent", data)
-            .then(res => console.log(res))
-            .catch(err => console.log(err));
+            .then(res => toastr.success("Student successfully created"))
+            .catch(err => toastr.success("Something wrong"));
     };
 
     render() {
@@ -65,13 +66,13 @@ class CreateStudentPage extends Component {
                                             <div className="col-md-6">
                                                 <div className="position-relative form-group">
                                                     <label className="">First Name</label>
-                                                    <input name="firstname" onChange={this.onChange} placeholder="First Name" type="email" className="form-control" />
+                                                    <input name="firstname" onChange={this.onChange} placeholder="First Name" type="text" className="form-control" />
                                                 </div>
                                             </div>
                                             <div className="col-md-6">
                                                 <div className="position-relative form-group">
                                                     <label className="">Last Name</label>
-                                                    <input name="lastname" onChange={this.onChange} placeholder="Last Name" type="email" className="form-control" />
+                                                    <input name="lastname" onChange={this.onChange} placeholder="Last Name" type="text" className="form-control" />
                                                 </div>
                                             </div>
                                         </div>
@@ -107,7 +108,7 @@ class CreateStudentPage extends Component {
                                             <div className="col-md-6">
                                                 <div className="position-relative form-group">
                                                     <label className="">NIC</label>
-                                                    <input name="nic" onChange={this.onChange} placeholder="NIC" type="email" className="form-control" />
+                                                    <input name="nic" onChange={this.onChange} placeholder="NIC" type="text" className="form-control" />
                                                 </div>
                                             </div>
                                         </div>

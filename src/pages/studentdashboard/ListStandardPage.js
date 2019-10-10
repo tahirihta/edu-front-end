@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Axios from "axios";
 import toastr from "toastr";
+import { MDBDataTable } from 'mdbreact';
 
 class ListStandardPage extends Component {
     state = {
@@ -21,19 +22,59 @@ class ListStandardPage extends Component {
             .catch(err => toastr.warning("Something wrong!"));
     }
     render() {
-        const standardsTable = this.state.standards.map((diploma, index) => {
-            return (
-                <tr key={index}>
-                    <th scope="row">{diploma.digitalcredid}</th>
-                    <td>{diploma.firstname}</td>
-                    <td>{diploma.lastname}</td>
-                    <td>{diploma.email}</td>
-                    <td>{diploma.programname}</td>
-                    <td>{diploma.postaladress}</td>
-                    <td>{diploma.nic}</td>
-                </tr>
-            );
-        });
+        const data = {
+            columns: [
+                {
+                    label: "Digital Id",
+                    field: "digitalcredid",
+                    sort: "asc",
+                },
+                {
+                    label: "First Name",
+                    field: "firstname",
+                    sort: "asc",
+                },
+                {
+                    label: "Last Name",
+                    field: "lastname",
+                    sort: "asc",
+                },
+                {
+                    label: "Email",
+                    field: "email",
+                    sort: "asc",
+                },
+                {
+                    label: "Program Name",
+                    field: "programname",
+                    sort: "asc",
+                },
+                {
+                    label: "Postal Address",
+                    field: "postaladress",
+                    sort: "asc",
+                },
+                {
+                    label: "NIC",
+                    field: "nic",
+                    sort: "asc",
+                },
+            ],
+            rows: this.state.standards
+        };
+        // const standardsTable = this.state.standards.map((diploma, index) => {
+        //     return (
+        //         <tr key={index}>
+        //             <th scope="row">{diploma.digitalcredid}</th>
+        //             <td>{diploma.firstname}</td>
+        //             <td>{diploma.lastname}</td>
+        //             <td>{diploma.email}</td>
+        //             <td>{diploma.programname}</td>
+        //             <td>{diploma.postaladress}</td>
+        //             <td>{diploma.nic}</td>
+        //         </tr>
+        //     );
+        // });
 
         return (
             <div className="app-main__outer">
@@ -55,7 +96,13 @@ class ListStandardPage extends Component {
                                     <h5 className="card-title">
                                         List of standards
                                     </h5>
-                                    <table
+                                    <MDBDataTable
+                                        striped
+                                        bordered
+                                        hover
+                                        data={data}
+                                        />
+                                    {/* <table
                                         id="example"
                                         className="mb-0 table table-striped"
                                     >
@@ -71,7 +118,7 @@ class ListStandardPage extends Component {
                                             </tr>
                                         </thead>
                                         <tbody>{standardsTable}</tbody>
-                                    </table>
+                                    </table> */}
                                 </div>
                             </div>
                         </div>

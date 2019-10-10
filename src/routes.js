@@ -109,6 +109,13 @@ const routes = [
                 component: lazy(() =>
                     import("./pages/studentdashboard/ListRevokeDiplomaPage")
                 )
+            },
+            {
+                path: "/dashboard/student/revoke-publish-diploma",
+                exact: true,
+                component: lazy(() =>
+                    import("./pages/studentdashboard/RevokePublishDiplomaPage")
+                )
             }
         ]
     }

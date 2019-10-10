@@ -131,34 +131,40 @@ class StudentSidebarLayout extends React.Component {
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="/dashboard/student/all-diploma">
-                                                <i className="metismenu-icon pe-7s-graph"></i>
-                                                All Diploma
-                                            </a>
+                                        <Link to="/dashboard/student/all-diploma">
+                                            <i className="metismenu-icon pe-7s-graph"></i>
+                                            All Diploma
+                                        </Link>
                                         </li>
                                         <li>
-                                            <a href="/dashboard/student/all-publish-diploma">
-                                                <i className="metismenu-icon pe-7s-graph"></i>
-                                                All Publish Diploma
-                                            </a>
+                                        <Link to="/dashboard/student/all-publish-diploma">
+                                            <i className="metismenu-icon pe-7s-graph"></i>
+                                            All Publish Diploma
+                                        </Link>
                                         </li>
                                         <li>
-                                            <a href="/dashboard/student/all-revoke-diploma">
-                                                <i className="metismenu-icon pe-7s-graph"></i>
-                                                All Revoke Diploma
-                                            </a>
+                                        <Link to="/dashboard/student/all-revoke-diploma">
+                                            <i className="metismenu-icon pe-7s-graph"></i>
+                                            All Revoke Diploma
+                                        </Link>
                                         </li>
                                         <li>
-                                            <a href="/dashboard/student/all-certification">
-                                                <i className="metismenu-icon pe-7s-graph"></i>
-                                                All Certification
-                                            </a>
+                                        <Link to="/dashboard/student/all-certification">
+                                            <i className="metismenu-icon pe-7s-graph"></i>
+                                            All Certifications
+                                        </Link>
                                         </li>
                                         <li>
-                                            <a href="/dashboard/student/all-standards">
-                                                <i className="metismenu-icon pe-7s-graph"></i>
-                                                All Standards
-                                            </a>
+                                        <Link to="/dashboard/student/all-standards">
+                                            <i className="metismenu-icon pe-7s-graph"></i>
+                                            All Standards
+                                        </Link>
+                                        </li>
+                                        <li>
+                                        <Link to="/dashboard/student/revoke-publish-diploma">
+                                            <i className="metismenu-icon pe-7s-graph"></i>
+                                            Revoke and Publish Diploma
+                                        </Link>
                                         </li>
                                         <li>
                                             <a

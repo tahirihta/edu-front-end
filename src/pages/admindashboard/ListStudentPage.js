@@ -1,18 +1,16 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { MDBDataTable } from 'mdbreact';
+import { studentColumns } from "../../columns";
 
 class ListStudentPage extends Component {
     state = {
-        students: []
+        students: [],
+        rows: []
     };
 
     async componentDidMount() {
         document.title = "List of students";
-
-        // axios
-        //     .get("http://d24w27cd80vt93.cloudfront.net/api/student/list")
-        //     .then(res => this.setState({ students: res.data }))
-        //     .catch(err => console.log(err));
 
         let res = axios.get(
             "http://d24w27cd80vt93.cloudfront.net/api/student/list"
@@ -22,19 +20,22 @@ class ListStudentPage extends Component {
     }
 
     render() {
-        const studentsTable = this.state.students.map((student, index) => {
-            return (
-                <tr key={index}>
-                    <th scope="row">{student.studentid}</th>
-                    <td>{student.firstname}</td>
-                    <td>{student.lastname}</td>
-                    <td>{student.email}</td>
-                    <td>{student.nationality}</td>
-                    <td>{student.postaladress}</td>
-                    <td>{student.nic}</td>
-                </tr>
-            );
+        this.state.students.forEach((value, index) => {
+            this.state.rows.push({
+                digitalcredid: value.studentid,
+                firstname: value.firstname,
+                lastname: value.lastname,
+                email: value.email,
+                nationality: value.nationality,
+                postaladress: value.postaladress,
+                nic: value.nic,
+            })
         });
+
+        const data = {
+            columns: studentColumns,
+            rows: this.state.rows
+        };
 
         return (
             <div className="app-main__outer">
@@ -56,23 +57,12 @@ class ListStudentPage extends Component {
                                     <h5 className="card-title">
                                         List of students
                                     </h5>
-                                    <table
-                                        id="example"
-                                        className="mb-0 table table-striped"
-                                    >
-                                        <thead>
-                                            <tr>
-                                                <th>#Id</th>
-                                                <th>First Name</th>
-                                                <th>Last Name</th>
-                                                <th>Email</th>
-                                                <th>Nationality</th>
-                                                <th>Postal Address</th>
-                                                <th>NIC</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>{studentsTable}</tbody>
-                                    </table>
+                                    <MDBDataTable
+                                        striped
+                                        bordered
+                                        hover
+                                        data={data}
+                                    />
                                 </div>
                             </div>
                         </div>

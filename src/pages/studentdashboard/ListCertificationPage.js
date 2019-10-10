@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import Axios from "axios";
 import toastr from "toastr";
+import { MDBDataTable } from 'mdbreact';
+import { columns } from "../../columns";
 
 class ListCertificationPage extends Component {
     state = {
-        certifications: []
+        certifications: [],
+        rows: []
     };
 
     componentDidMount() {
@@ -21,19 +24,34 @@ class ListCertificationPage extends Component {
             .catch(err => toastr.warning("Something wrong!"));
     }
     render() {
-        const certificationsTable = this.state.certifications.map((diploma, index) => {
-            return (
-                <tr key={index}>
-                    <th scope="row">{diploma.digitalcredid}</th>
-                    <td>{diploma.firstname}</td>
-                    <td>{diploma.lastname}</td>
-                    <td>{diploma.email}</td>
-                    <td>{diploma.programname}</td>
-                    <td>{diploma.postaladress}</td>
-                    <td>{diploma.nic}</td>
-                </tr>
-            );
+        this.state.certifications.forEach((value, index) => {
+            this.state.rows.push({
+                digitalcredid: value.digitalcredid,
+                firstname: value.firstname,
+                lastname: value.lastname,
+                email: value.email,
+                programname: value.programname,
+                postaladress: value.postaladress,
+                nic: value.nic,
+            })
         });
+        const data = {
+            columns: columns,
+            rows: this.state.rows
+        };
+        // const certificationsTable = this.state.certifications.map((diploma, index) => {
+        //     return (
+        //         <tr key={index}>
+        //             <th scope="row">{diploma.digitalcredid}</th>
+        //             <td>{diploma.firstname}</td>
+        //             <td>{diploma.lastname}</td>
+        //             <td>{diploma.email}</td>
+        //             <td>{diploma.programname}</td>
+        //             <td>{diploma.postaladress}</td>
+        //             <td>{diploma.nic}</td>
+        //         </tr>
+        //     );
+        // });
 
         return (
             <div className="app-main__outer">
@@ -55,7 +73,13 @@ class ListCertificationPage extends Component {
                                     <h5 className="card-title">
                                         List of certifications
                                     </h5>
-                                    <table
+                                    <MDBDataTable
+                                        striped
+                                        bordered
+                                        hover
+                                        data={data}
+                                        />
+                                    {/* <table
                                         id="example"
                                         className="mb-0 table table-striped"
                                     >
@@ -71,7 +95,7 @@ class ListCertificationPage extends Component {
                                             </tr>
                                         </thead>
                                         <tbody>{certificationsTable}</tbody>
-                                    </table>
+                                    </table> */}
                                 </div>
                             </div>
                         </div>
