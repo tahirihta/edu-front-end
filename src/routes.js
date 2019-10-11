@@ -10,6 +10,7 @@ import StudentDashboardPage from "./pages/studentdashboard/StudentDashboardPage"
 import StudentLayout from "./pages/studentdashboard/layouts/StudentLayout";
 import VerifierLoginPage from "./pages/VerifierLoginPage";
 import StudentLoginPage from "./pages/StudentLoginPage";
+import ErrorPage from "./pages/ErrorPage";
 
 const routes = [
     {
@@ -62,7 +63,7 @@ const routes = [
         component: VerifierLoginPage
     },
     {
-        path: "/student/login",
+        path: "/student-login",
         exact: true,
         component: StudentLoginPage
     },
@@ -118,29 +119,11 @@ const routes = [
                 )
             }
         ]
+    },
+    {
+        path: "*",
+        component: ErrorPage
     }
-    //   {
-    //     path: '/errors',
-    //     component: ErrorLayout,
-    //     routes: [
-    //       {
-    //         path: '/errors/error-404',
-    //         exact: true,
-    //         component: lazy(() => import('views/Error404'))
-    //       },
-    //     ]
-    //   },
-    //   {
-    //     route: '*',
-    //     component: DashboardLayout,
-    //     routes: [
-    //       {
-    //         path: '/calendar',
-    //         exact: true,
-    //         component: lazy(() => import('views/Calendar'))
-    //       },
-    //     ]
-    //   }
 ];
 
 export default routes;

@@ -1,6 +1,8 @@
+/* eslint-disable */
 import React, { Component } from "react";
 import Axios from "axios";
 import toastr from "toastr";
+import bg from "../assets/images/originals/bg-student.jpg";
 
 class StudentLoginPage extends Component {
     componentDidMount() {
@@ -39,29 +41,45 @@ class StudentLoginPage extends Component {
                     );
                     this.props.history.push("/dashboard/student");
                 })
-                .catch(err => console.log(err));
+                .catch(err => {
+                    if (err.response && err.response.status === 403) {
+                        toastr.error("Invalid credentials. Try again later.");
+                    }
+                });
         } else {
             toastr.warning("All fields are mandatory");
         }
     };
 
     render() {
-        let bg = window.location.origin + "/images/originals/city.jpg";
         return (
-            <div
-                className="app-container app-theme-white body-tabs-shadow"
-                style={{
-                    backgroundImage: "url(" + bg + ")",
-                    backgroundPosition: "center",
-                    backgroundSize: "cover",
-                    backgroundRepeat: "no-repeat"
-                }}
-            >
+            <div className="app-container app-theme-white body-tabs-shadow">
                 <div className="app-container">
                     <div className="h-100">
                         <div className="h-100 no-gutters row">
-                            <div className="h-100 d-flex bg-white justify-content-center align-items-center col-md-12 col-lg-12">
-                                <div className="mx-auto app-login-box col-sm-12 col-md-10 col-lg-5">
+                            <div className="d-none d-lg-block col-lg-4">
+                                <div className="slider-light">
+                                    <div className="slick-slider">
+                                        <div>
+                                            <div
+                                                className="position-relative h-100 d-flex justify-content-center align-items-center bg-plum-plate"
+                                                tabIndex="-1"
+                                            >
+                                                <div
+                                                    className="slide-img-bg"
+                                                    style={{
+                                                        backgroundImage: `url(${bg})`,
+                                                        backgroundPosition:
+                                                            "top"
+                                                    }}
+                                                ></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="h-100 d-flex bg-white justify-content-center align-items-center col-md-12 col-lg-8">
+                                <div className="mx-auto app-login-box col-sm-12 col-md-10 col-lg-7">
                                     <div className="app-logo"></div>
                                     <h4 className="mb-0">
                                         <span className="d-block">
@@ -107,26 +125,13 @@ class StudentLoginPage extends Component {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div className="divider row"></div>
                                             <div className="d-flex align-items-center">
                                                 <div className="ml-auto">
-                                                    <a
-                                                        href="/verifier-login"
-                                                        className="btn-lg btn btn-link"
-                                                    >
-                                                        Verifier Login
-                                                    </a>
-                                                    <a
-                                                        href="/"
-                                                        className="btn-lg btn btn-link"
-                                                    >
-                                                        Admin Login
-                                                    </a>
                                                     <button
                                                         className="btn btn-primary btn-lg"
                                                         onClick={this.onLogin}
                                                     >
-                                                        Login to Dashboard
+                                                        Login
                                                     </button>
                                                 </div>
                                             </div>

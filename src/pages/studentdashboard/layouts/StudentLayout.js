@@ -4,8 +4,11 @@ import StudentSidebarLayout from "./StudentSidebarLayout";
 
 class StudentLayout extends Component {
     componentDidMount() {
-        if (!localStorage.studentInfo) {
-            this.props.history.push("/student/login");
+        if (
+            !localStorage.studentInfo &&
+            localStorage.studentInfo !== undefined
+        ) {
+            this.props.history.push("/student-login");
         }
     }
 
