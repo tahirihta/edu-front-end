@@ -11,6 +11,7 @@ import StudentLayout from "./pages/studentdashboard/layouts/StudentLayout";
 import VerifierLoginPage from "./pages/VerifierLoginPage";
 import StudentLoginPage from "./pages/StudentLoginPage";
 import ErrorPage from "./pages/ErrorPage";
+import RecoverPasswordPage from "./pages/RecoverPasswordPage";
 
 const routes = [
     {
@@ -66,6 +67,10 @@ const routes = [
         path: "/student-login",
         exact: true,
         component: StudentLoginPage
+    },
+    {
+        path: "/recover-password",
+        component: RecoverPasswordPage
     },
     {
         path: "/dashboard/student",

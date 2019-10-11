@@ -5,49 +5,13 @@ import toastr from "toastr";
 import bg from "../assets/images/originals/bg-university.jpg";
 import { Link } from "react-router-dom";
 
-class HomePage extends Component {
+class RecoverPasswordPage extends Component {
     componentDidMount() {
-        document.title = "Admin login";
-
-        if (localStorage.adminSessionToken) {
-            this.props.history.push("/dashboard/admin");
-        }
+        document.title = "Recover Password";
     }
-
-    state = {
-        loginid: "",
-        password: ""
-    };
-
-    onChange = e => this.setState({ [e.target.name]: e.target.value });
 
     onLogin = e => {
         e.preventDefault();
-
-        const data = {
-            loginid: this.state.loginid,
-            password: this.state.password
-        };
-
-        if (this.state.loginid && this.state.password) {
-            Axios.post(
-                "http://d24w27cd80vt93.cloudfront.net/api/login/univ",
-                data
-            )
-                .then(res => {
-                    toastr.success("Successfully logged in");
-                    localStorage.setItem("adminSessionToken", res.data[1]);
-                    localStorage.setItem("adminName", res.data[0]);
-                    this.props.history.push("/dashboard/admin");
-                })
-                .catch(err => {
-                    if (err.response && err.response.status === 403) {
-                        toastr.error("Invalid credentials. Try again later.");
-                    }
-                });
-        } else {
-            toastr.warning("All fields are mandatory");
-        }
     };
 
     render() {
@@ -80,12 +44,10 @@ class HomePage extends Component {
                             <div className="h-100 d-flex bg-white justify-content-center align-items-center col-md-12 col-lg-8">
                                 <div className="mx-auto app-login-box col-sm-12 col-md-10 col-lg-7">
                                     <div className="app-logo"></div>
-                                    <h4 className="mb-0">
-                                        <span className="d-block">
-                                            Welcome back,
-                                        </span>
+                                    <h4>
+                                        <div>Forgot your Password?</div>
                                         <span>
-                                            Please sign in to your account.
+                                            Use the form below to recover it.
                                         </span>
                                     </h4>
                                     <div className="divider row"></div>
@@ -107,36 +69,23 @@ class HomePage extends Component {
                                                             }
                                                         />
                                                     </div>
-
-                                                    <div className="position-relative form-group">
-                                                        <label className="">
-                                                            Password
-                                                        </label>
-                                                        <input
-                                                            name="password"
-                                                            placeholder="Password here..."
-                                                            type="password"
-                                                            className="form-control"
-                                                            onChange={
-                                                                this.onChange
-                                                            }
-                                                        />
-                                                    </div>
                                                 </div>
                                             </div>
                                             <div className="d-flex align-items-center">
-                                                <div className="ml-auto">
+                                                <h6 class="mb-0">
                                                     <Link
-                                                        to="/recover-password"
-                                                        className="btn-lg btn btn-link"
+                                                        to="/"
+                                                        className="text-primary"
                                                     >
-                                                        Recover Password
+                                                        Sign in existing account
                                                     </Link>
+                                                </h6>
+                                                <div className="ml-auto">
                                                     <button
                                                         className="btn btn-primary btn-lg"
                                                         onClick={this.onLogin}
                                                     >
-                                                        Login
+                                                        Recover
                                                     </button>
                                                 </div>
                                             </div>
@@ -152,4 +101,4 @@ class HomePage extends Component {
     }
 }
 
-export default HomePage;
+export default RecoverPasswordPage;
