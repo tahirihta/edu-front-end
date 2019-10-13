@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import Axios from "axios";
 import toastr from "toastr";
-import { MDBDataTable } from 'mdbreact';
+import { MDBDataTable } from "mdbreact";
 
 class ListStandardPage extends Component {
     state = {
@@ -15,7 +15,9 @@ class ListStandardPage extends Component {
             .then(res => {
                 this.setState({
                     standards: res.data.filter(
-                        x => x.type_digital_credential === "Standard" || x.type_digital_credential === "STANDARD"
+                        x =>
+                            x.type_digital_credential === "Standard" ||
+                            x.type_digital_credential === "STANDARD"
                     )
                 });
             })
@@ -27,38 +29,38 @@ class ListStandardPage extends Component {
                 {
                     label: "Digital Id",
                     field: "digitalcredid",
-                    sort: "asc",
+                    sort: "asc"
                 },
                 {
                     label: "First Name",
                     field: "firstname",
-                    sort: "asc",
+                    sort: "asc"
                 },
                 {
                     label: "Last Name",
                     field: "lastname",
-                    sort: "asc",
+                    sort: "asc"
                 },
                 {
                     label: "Email",
                     field: "email",
-                    sort: "asc",
+                    sort: "asc"
                 },
                 {
                     label: "Program Name",
                     field: "programname",
-                    sort: "asc",
+                    sort: "asc"
                 },
                 {
                     label: "Postal Address",
                     field: "postaladress",
-                    sort: "asc",
+                    sort: "asc"
                 },
                 {
                     label: "NIC",
                     field: "nic",
-                    sort: "asc",
-                },
+                    sort: "asc"
+                }
             ],
             rows: this.state.standards
         };
@@ -83,7 +85,7 @@ class ListStandardPage extends Component {
                         <div className="page-title-wrapper">
                             <div className="page-title-heading">
                                 <div className="page-title-icon">
-                                    <i className="pe-7s-car icon-gradient bg-mean-fruit"></i>
+                                    <i className="fas fa-cog icon-gradient bg-mean-fruit"></i>
                                 </div>
                                 <div>All Standards</div>
                             </div>
@@ -101,7 +103,7 @@ class ListStandardPage extends Component {
                                         bordered
                                         hover
                                         data={data}
-                                        />
+                                    />
                                     {/* <table
                                         id="example"
                                         className="mb-0 table table-striped"

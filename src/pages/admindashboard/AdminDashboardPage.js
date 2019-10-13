@@ -13,7 +13,7 @@ class AdminDashboardPage extends Component {
                         <div className="page-title-wrapper">
                             <div className="page-title-heading">
                                 <div className="page-title-icon">
-                                    <i className="pe-7s-car icon-gradient bg-mean-fruit"></i>
+                                    <i className="fas fa-align-justify icon-gradient bg-mean-fruit"></i>
                                 </div>
                                 <div>Dashboard</div>
                             </div>

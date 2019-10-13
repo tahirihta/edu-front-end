@@ -125,10 +125,25 @@ class StudentSidebarLayout extends React.Component {
                                             Dashboard
                                         </li>
                                         <li>
-                                            <a href="/dashboard/student">
-                                                <i className="metismenu-icon pe-7s-graph"></i>
+                                            <a href="#">
+                                                <i className="metismenu-icon pe-7s-rocket"></i>
                                                 Dashboard
+                                                <i className="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                                             </a>
+                                            <ul>
+                                                <li>
+                                                    <Link to="#">
+                                                        <i className="metismenu-icon pe-7s-graph"></i>
+                                                        Management
+                                                    </Link>
+                                                </li>
+                                                <li>
+                                                    <Link to="/dashboard/student">
+                                                        <i className="metismenu-icon pe-7s-graph"></i>
+                                                        Analytics
+                                                    </Link>
+                                                </li>
+                                            </ul>
                                         </li>
                                         <li>
                                             <a href="#">
@@ -177,9 +192,15 @@ class StudentSidebarLayout extends React.Component {
                                                     </Link>
                                                 </li>
                                                 <li>
-                                                    <Link to="/dashboard/student/revoke-publish-diploma">
+                                                    <Link to="/dashboard/student/publish-diploma">
                                                         <i className="metismenu-icon pe-7s-graph"></i>
-                                                        Revoke and Publish Diploma
+                                                        Publish Diploma
+                                                    </Link>
+                                                </li>
+                                                <li>
+                                                    <Link to="/dashboard/student/revoke-diploma">
+                                                        <i className="metismenu-icon pe-7s-graph"></i>
+                                                        Revoke Diploma
                                                     </Link>
                                                 </li>
                                             </ul>

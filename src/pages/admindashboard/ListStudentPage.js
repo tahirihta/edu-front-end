@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { MDBDataTable } from 'mdbreact';
+import { MDBDataTable } from "mdbreact";
 import { studentColumns } from "../../columns";
 
 class ListStudentPage extends Component {
@@ -28,8 +28,8 @@ class ListStudentPage extends Component {
                 email: value.email,
                 nationality: value.nationality,
                 postaladress: value.postaladress,
-                nic: value.nic,
-            })
+                nic: value.nic
+            });
         });
 
         const data = {
@@ -44,7 +44,7 @@ class ListStudentPage extends Component {
                         <div className="page-title-wrapper">
                             <div className="page-title-heading">
                                 <div className="page-title-icon">
-                                    <i className="pe-7s-car icon-gradient bg-mean-fruit"></i>
+                                    <i className="fas fa-graduation-cap icon-gradient bg-mean-fruit"></i>
                                 </div>
                                 <div>All Students</div>
                             </div>

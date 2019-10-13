@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Axios from "axios";
 import toastr from "toastr";
-import { MDBDataTable } from 'mdbreact';
+import { MDBDataTable } from "mdbreact";
 import { columns } from "../../columns";
 
 class AllDiplomaPage extends Component {
@@ -23,14 +23,16 @@ class AllDiplomaPage extends Component {
             .then(res => {
                 this.setState({
                     diplomas: res.data.filter(
-                        x => (x.type_digital_credential === "DIPLOMA" || x.type_digital_credential === "Diploma") && x.studentid === this.state.student.studentid
+                        x =>
+                            (x.type_digital_credential === "DIPLOMA" ||
+                                x.type_digital_credential === "Diploma") &&
+                            x.studentid === this.state.student.studentid
                     )
                 });
             })
             .catch(err => toastr.warning("Something wrong!"));
     }
     render() {
-        
         this.state.diplomas.forEach((value, index) => {
             this.state.rows.push({
                 digitalcredid: value.digitalcredid,
@@ -39,9 +41,9 @@ class AllDiplomaPage extends Component {
                 email: value.email,
                 programname: value.programname,
                 postaladress: value.postaladress,
-                nic: value.nic,
-            })
-        })
+                nic: value.nic
+            });
+        });
         const data = {
             columns: columns,
             rows: this.state.rows
@@ -67,7 +69,7 @@ class AllDiplomaPage extends Component {
                         <div className="page-title-wrapper">
                             <div className="page-title-heading">
                                 <div className="page-title-icon">
-                                    <i className="pe-7s-car icon-gradient bg-mean-fruit"></i>
+                                    <i className="fas fa-atom icon-gradient bg-mean-fruit"></i>
                                 </div>
                                 <div>All Diploma</div>
                             </div>
@@ -85,7 +87,7 @@ class AllDiplomaPage extends Component {
                                         bordered
                                         hover
                                         data={data}
-                                        />
+                                    />
                                     {/* <table
                                         id="example"
                                         className="mb-0 table table-striped"

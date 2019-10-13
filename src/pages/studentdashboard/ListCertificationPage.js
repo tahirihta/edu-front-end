@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Axios from "axios";
 import toastr from "toastr";
-import { MDBDataTable } from 'mdbreact';
+import { MDBDataTable } from "mdbreact";
 import { columns } from "../../columns";
 
 class ListCertificationPage extends Component {
@@ -17,7 +17,9 @@ class ListCertificationPage extends Component {
             .then(res => {
                 this.setState({
                     certifications: res.data.filter(
-                        x => x.type_digital_credential === "Certification" || x.type_digital_credential === "CERTIFICATION"
+                        x =>
+                            x.type_digital_credential === "Certification" ||
+                            x.type_digital_credential === "CERTIFICATION"
                     )
                 });
             })
@@ -32,8 +34,8 @@ class ListCertificationPage extends Component {
                 email: value.email,
                 programname: value.programname,
                 postaladress: value.postaladress,
-                nic: value.nic,
-            })
+                nic: value.nic
+            });
         });
         const data = {
             columns: columns,
@@ -60,7 +62,7 @@ class ListCertificationPage extends Component {
                         <div className="page-title-wrapper">
                             <div className="page-title-heading">
                                 <div className="page-title-icon">
-                                    <i className="pe-7s-car icon-gradient bg-mean-fruit"></i>
+                                    <i className="fas fa-certificate icon-gradient bg-mean-fruit"></i>
                                 </div>
                                 <div>All Certifications</div>
                             </div>
@@ -78,7 +80,7 @@ class ListCertificationPage extends Component {
                                         bordered
                                         hover
                                         data={data}
-                                        />
+                                    />
                                     {/* <table
                                         id="example"
                                         className="mb-0 table table-striped"

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Axios from "axios";
 import toastr from "toastr";
-import { MDBDataTable } from 'mdbreact';
+import { MDBDataTable } from "mdbreact";
 import { columns } from "../../columns";
 
 class ListRevokeDiplomaPage extends Component {
@@ -14,7 +14,10 @@ class ListRevokeDiplomaPage extends Component {
 
         const student = JSON.parse(localStorage.studentInfo);
 
-        Axios.get("http://d24w27cd80vt93.cloudfront.net/api/shared/listRevoked/" + student.studentid)
+        Axios.get(
+            "http://d24w27cd80vt93.cloudfront.net/api/shared/listRevoked/" +
+                student.studentid
+        )
             .then(res => {
                 this.setState({
                     diplomas: res.data
@@ -31,8 +34,8 @@ class ListRevokeDiplomaPage extends Component {
                 email: value.email,
                 programname: value.programname,
                 postaladress: value.postaladress,
-                nic: value.nic,
-            })
+                nic: value.nic
+            });
         });
         const data = {
             columns: columns,
@@ -46,7 +49,7 @@ class ListRevokeDiplomaPage extends Component {
                         <div className="page-title-wrapper">
                             <div className="page-title-heading">
                                 <div className="page-title-icon">
-                                    <i className="pe-7s-car icon-gradient bg-mean-fruit"></i>
+                                    <i className="fas fa-atom icon-gradient bg-mean-fruit"></i>
                                 </div>
                                 <div>All Revoked Diplomas</div>
                             </div>
@@ -64,7 +67,7 @@ class ListRevokeDiplomaPage extends Component {
                                         bordered
                                         hover
                                         data={data}
-                                        />
+                                    />
                                     {/* <table
                                         id="example"
                                         className="mb-0 table table-striped"

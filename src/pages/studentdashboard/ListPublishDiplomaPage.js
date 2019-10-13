@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Axios from "axios";
 import toastr from "toastr";
-import { MDBDataTable } from 'mdbreact';
+import { MDBDataTable } from "mdbreact";
 import { columns } from "../../columns";
 
 class ListPublishDiplomaPage extends Component {
@@ -15,7 +15,10 @@ class ListPublishDiplomaPage extends Component {
 
         const student = JSON.parse(localStorage.studentInfo);
 
-        Axios.get("http://d24w27cd80vt93.cloudfront.net/api/shared/listAll/" + student.studentid)
+        Axios.get(
+            "http://d24w27cd80vt93.cloudfront.net/api/shared/listAll/" +
+                student.studentid
+        )
             .then(res => {
                 this.setState({
                     diplomas: res.data
@@ -24,7 +27,6 @@ class ListPublishDiplomaPage extends Component {
             .catch(err => toastr.warning("Something wrong!"));
     }
     render() {
-
         this.state.diplomas.forEach((value, index) => {
             this.state.rows.push({
                 digitalcredid: value.digitalcredid,
@@ -33,8 +35,8 @@ class ListPublishDiplomaPage extends Component {
                 email: value.email,
                 programname: value.programname,
                 postaladress: value.postaladress,
-                nic: value.nic,
-            })
+                nic: value.nic
+            });
         });
         const data = {
             columns: columns,
@@ -48,7 +50,7 @@ class ListPublishDiplomaPage extends Component {
                         <div className="page-title-wrapper">
                             <div className="page-title-heading">
                                 <div className="page-title-icon">
-                                    <i className="pe-7s-car icon-gradient bg-mean-fruit"></i>
+                                    <i className="fas fa-atom icon-gradient bg-mean-fruit"></i>
                                 </div>
                                 <div>All Publish Diplomas</div>
                             </div>
@@ -66,7 +68,7 @@ class ListPublishDiplomaPage extends Component {
                                         bordered
                                         hover
                                         data={data}
-                                        />
+                                    />
                                 </div>
                             </div>
                         </div>

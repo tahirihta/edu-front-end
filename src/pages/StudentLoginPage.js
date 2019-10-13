@@ -9,7 +9,8 @@ class StudentLoginPage extends Component {
         document.title = "Student login";
 
         if (localStorage.adminSessionToken) {
-            this.props.history.push("/dashboard/student");
+            location.href = "/dashboard/student";
+            // this.props.history.push("/dashboard/student");
         }
     }
 
@@ -39,7 +40,8 @@ class StudentLoginPage extends Component {
                         "studentInfo",
                         JSON.stringify(res.data[0])
                     );
-                    this.props.history.push("/dashboard/student");
+                    location.href = "/dashboard/student";
+                    // this.props.history.push("/dashboard/student");
                 })
                 .catch(err => {
                     if (err.response && err.response.status === 403) {

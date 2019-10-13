@@ -1,8 +1,8 @@
 /* eslint-disable react/no-multi-comp */
 /* eslint-disable react/display-name */
 /* eslint-disable */
-import React, { lazy } from 'react';
-import { Redirect } from 'react-router-dom';
+import React, { lazy } from "react";
+import { Redirect } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import AdminLayout from "./pages/admindashboard/layouts/AdminLayout";
 import AdminDashboardPage from "./pages/admindashboard/AdminDashboardPage";
@@ -134,12 +134,19 @@ const routes = [
                 )
             },
             {
-                path: "/dashboard/student/revoke-publish-diploma",
+                path: "/dashboard/student/publish-diploma",
                 exact: true,
                 component: lazy(() =>
-                    import("./pages/studentdashboard/RevokePublishDiplomaPage")
+                    import("./pages/studentdashboard/PublishDiplomaPage")
                 )
             },
+            {
+                path: "/dashboard/student/revoke-diploma",
+                exact: true,
+                component: lazy(() =>
+                    import("./pages/studentdashboard/RevokeDiplomaPage")
+                )
+            }
         ]
     },
     {

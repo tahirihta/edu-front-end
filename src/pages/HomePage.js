@@ -10,7 +10,8 @@ class HomePage extends Component {
         document.title = "Admin login";
 
         if (localStorage.adminSessionToken) {
-            this.props.history.push("/dashboard/admin");
+            location.href = "/dashboard/admin";
+            // this.props.history.push("/dashboard/admin");
         }
     }
 
@@ -38,7 +39,8 @@ class HomePage extends Component {
                     toastr.success("Successfully logged in");
                     localStorage.setItem("adminSessionToken", res.data[1]);
                     localStorage.setItem("adminName", res.data[0]);
-                    this.props.history.push("/dashboard/admin");
+                    location.href = "/dashboard/admin";
+                    // this.props.history.push("/dashboard/admin");
                 })
                 .catch(err => {
                     if (err.response && err.response.status === 403) {
