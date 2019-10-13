@@ -4,6 +4,7 @@ import axios from 'axios';
 import toastr from 'toastr';
 import 'toastr/build/toastr.min.css';
 import { setStudent } from '../actions/studentActions';
+import { setModal } from '../actions/modalActions';
 import { connect } from 'react-redux';
 import CreateStudentModal from './CreateStudentModal';
 
@@ -19,7 +20,7 @@ class StudentSearchModal extends React.Component {
 
     toggle = () => {
         this.setState({
-            modal: !this.state.modal
+            modal: !this.props.modal.modal.searchModal
         });
     }
 
@@ -44,8 +45,16 @@ class StudentSearchModal extends React.Component {
                         toastr.success("Student Found");
                         this.setState({ modal: false });
                     } else {
-                        toastr.warning("Student Not Found. Create now..");
-                        this.setState({ modal: false, createModal: true });
+                        this.props.setStudent({
+                            "firstname": this.state.sfirstname,
+                            "lastname": this.state.slastname,
+                            "birthdate": this.state.sbirthdate
+                        });
+                        toastr.warning("Student Not Found. Create new student.");
+                        this.props.setModal({
+                            createModal: true,
+                            searchModal: false,
+                        });
                     }
                 })
                 .catch(err => console.log(err));
@@ -56,7 +65,7 @@ class StudentSearchModal extends React.Component {
 
     UNSAFE_componentWillReceiveProps(nextProps) {
         this.setState({
-            modal: nextProps.modalIsOpen
+            modal: nextProps.modal.modal.searchModal
         });
     }
 
@@ -120,14 +129,15 @@ class StudentSearchModal extends React.Component {
                         <Button color="primary" onClick={this.onSearch}>Search</Button>{' '}
                     </ModalFooter>
                 </Modal>
-                <CreateStudentModal createModal={this.state.createModal}/>
+                <CreateStudentModal/>
             </span>
         );
     }
 }
 
 const mapStateToProps = state => ({
-    student: state.student
+    student: state.student,
+    modal: state.modal,
 });
 
-export default connect(mapStateToProps, { setStudent })(StudentSearchModal);
+export default connect(mapStateToProps, { setStudent, setModal })(StudentSearchModal);

@@ -126,28 +126,58 @@ class SidebarLayout extends React.Component {
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link to="/dashboard/admin/all-students">
-                                            <i className="metismenu-icon pe-7s-graph"></i>
-                                            All Students
-                                        </Link>
+                                        <a href="#">
+                                            <i className="metismenu-icon pe-7s-rocket"></i>
+                                            Students
+                                            <i className="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                                        </a>
+                                        <ul>
+                                            <li>
+                                                <Link to="/dashboard/admin/all-students">
+                                                    <i className="metismenu-icon pe-7s-graph"></i>
+                                                    All Students
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                <Link to="/dashboard/admin/add-student">
+                                                    <i className="metismenu-icon pe-7s-graph"></i>
+                                                    Add New Student
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                <Link to="/dashboard/admin/search-student">
+                                                    <i className="metismenu-icon pe-7s-graph"></i>
+                                                    Search Student
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                <Link to="/dashboard/admin/search-student-credential">
+                                                    <i className="metismenu-icon pe-7s-graph"></i>
+                                                    Search Student Credential
+                                                </Link>
+                                            </li>
+                                        </ul>
                                     </li>
                                     <li>
-                                        <Link to="/dashboard/admin/all-credentials">
-                                            <i className="metismenu-icon pe-7s-graph"></i>
-                                            All Credentials
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link to="/dashboard/admin/add-credential">
-                                            <i className="metismenu-icon pe-7s-graph"></i>
-                                            Add Credential
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link to="/dashboard/admin/add-student">
-                                            <i className="metismenu-icon pe-7s-graph"></i>
-                                            Add New Student
-                                        </Link>
+                                        <a href="#">
+                                            <i className="metismenu-icon pe-7s-browser"></i>
+                                            Credentials
+                                            <i className="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                                        </a>
+                                        <ul>
+                                            <li>
+                                                <Link to="/dashboard/admin/all-credentials">
+                                                    <i className="metismenu-icon pe-7s-graph"></i>
+                                                    All Credentials
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                <Link to="/dashboard/admin/add-credential">
+                                                    <i className="metismenu-icon pe-7s-graph"></i>
+                                                    Add Credential
+                                                </Link>
+                                            </li>
+                                        </ul>
                                     </li>
                                     <li>
                                         <a

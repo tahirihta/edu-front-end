@@ -6,6 +6,7 @@ import StudentSearchModal from '../../components/StudentSearchModal';
 import { connect } from 'react-redux';
 import Axios from 'axios';
 import toastr from 'toastr';
+import { setModal } from '../../actions/modalActions';
 
 
 class CreateCredentialPage extends Component {
@@ -15,8 +16,10 @@ class CreateCredentialPage extends Component {
         university: "",
         programName: "",
         attributionDate: "",
+        email: "",
         type_digital_credential: "",
-        modalIsOpen: false
+        modalIsOpen: false,
+        disabled: true
     };
 
     componentDidMount() {
@@ -24,9 +27,17 @@ class CreateCredentialPage extends Component {
     };
 
     UNSAFE_componentWillReceiveProps(nextProps) {
-        this.setState({
-            studentId: nextProps.student.student.studentid,
-        });
+        if(nextProps.student.student.studentid) {
+            this.setState({
+                studentId: nextProps.student.student.studentid,
+            });
+        }
+
+        if(nextProps.student.student.studentId) {
+            this.setState({
+                studentId: nextProps.student.student.studentId,
+            });
+        }
     }
 
     onSubmit = e => {
@@ -37,6 +48,7 @@ class CreateCredentialPage extends Component {
                 "studentId": this.state.studentId,
                 "university": this.state.university,
                 "programName": this.state.programName,
+                "email": this.state.email,
                 "attributionDate": this.state.attributionDate,
                 "type_digital_credential": this.state.type_digital_credential
             })
@@ -48,14 +60,26 @@ class CreateCredentialPage extends Component {
     }
 
     openSearchModal = e => {
-        this.setState({modalIsOpen: true});
+        // this.setState({modalIsOpen: true});
+        this.props.setModal({
+            createModal: false,
+            searchModal: true,
+        });
     };
 
     hideModal = () => {
         this.setState({ modalIsOpen: false });
     }
 
-    onChange = (e) => this.setState({[e.target.name]: e.target.value});
+    onChange = (e) => {
+        this.setState({[e.target.name]: e.target.value}, () => {
+            if(this.state.studentId && this.state.university && this.state.programName && this.state.attributionDate && this.state.type_digital_credential) {
+                this.setState({disabled: false});
+            } else {
+                this.setState({disabled: true});
+            }
+        });
+    };
 
     render() {
         return (
@@ -65,7 +89,7 @@ class CreateCredentialPage extends Component {
                         <div className="page-title-wrapper">
                             <div className="page-title-heading">
                                 <div className="page-title-icon">
-                                    <i className="pe-7s-car icon-gradient bg-mean-fruit">
+                                    <i className="fas fa-atom icon-gradient bg-mean-fruit">
                                     </i>
                                 </div>
                                 <div>
@@ -112,15 +136,21 @@ class CreateCredentialPage extends Component {
                                                 <div className="position-relative form-group">
                                                     <label className="">Type Digital Credential</label>
                                                     <select name="type_digital_credential" onChange={this.onChange} className="form-control">
-                                                        <option defaultValue>Choose one</option>
+                                                        <option defaultValue>Choose One</option>
                                                         <option value="Diploma">Diploma</option>
                                                         <option value="Certification">Certification</option>
                                                         <option value="Standard">Standard</option>
                                                     </select>
                                                 </div>
                                             </div>
+                                            <div className="col-md-6">
+                                                <div className="position-relative form-group">
+                                                    <label className="">Email</label>
+                                                    <input name="email" onChange={this.onChange} required defaultValue={this.state.email} placeholder="Enter Email" type="email" className="form-control" />
+                                                </div>
+                                            </div>
                                         </div>
-                                        <button className="mt-1 btn btn-primary" onClick={this.onSubmit}>Save</button>
+                                        <button className="mt-1 btn btn-primary" disabled={this.state.disabled} onClick={this.onSubmit}>Save</button>
                                     </form>
                                     <button type="submit" className="mt-1 btn btn-success" onClick={this.openSearchModal}>Search</button>
                                 </div>
@@ -142,4 +172,4 @@ const mapStateToProps = state => ({
     student: state.student
 });
 
-export default connect(mapStateToProps, { })(CreateCredentialPage);
+export default connect(mapStateToProps, { setModal })(CreateCredentialPage);

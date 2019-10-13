@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import toastr from "toastr";
 import axios from "axios";
-import bg from "../assets/images/originals/bg-university.jpg";
+import bg from "../assets/images/originals/bg-verifier.jpg";
 
 class VerifierLoginPage extends Component {
     componentDidMount() {

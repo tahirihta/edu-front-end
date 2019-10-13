@@ -34,9 +34,35 @@ class CreateStudentPage extends Component {
             "nic": this.state.nic
         }
 
-        axios.post("http://d24w27cd80vt93.cloudfront.net/api/student/addStudent", data)
-            .then(res => toastr.success("Student successfully created"))
-            .catch(err => toastr.success("Something wrong"));
+        if(this.state.firstname && this.state.lastname && this.state.birthdate && this.state.email && this.state.postaladress && this.state.nic) {
+            // problem in your search API, it can't handle OR fields
+            axios.post("http://d24w27cd80vt93.cloudfront.net/api/student/search", {
+                "firstname": this.state.firstname,
+                "lastname": this.state.lastname,
+            }).then(res => {
+                if(res.data.length > 0) {
+                    toastr.warning("Student with this information is already exists. Try again!");
+                } else {
+                    axios.post("http://d24w27cd80vt93.cloudfront.net/api/student/addStudent", data)
+                        .then(res => {
+                            toastr.success("Student successfully created");
+                            this.setState({
+                                firstname: "",
+                                lastname: "",
+                                birthdate: "",
+                                nationality: "",
+                                email: "",
+                                postaladress: "",
+                                nic: ""
+                            })
+                        })
+                        .catch(err => toastr.success("Something wrong"));
+                }
+            })
+            .catch(err => console.log(err));
+        } else {
+            toastr.warning("All fields are mandatory");
+        }
     };
 
     render() {
@@ -47,7 +73,7 @@ class CreateStudentPage extends Component {
                         <div className="page-title-wrapper">
                             <div className="page-title-heading">
                                 <div className="page-title-icon">
-                                    <i className="pe-7s-car icon-gradient bg-mean-fruit">
+                                    <i className="fas fa-graduation-cap icon-gradient bg-mean-fruit">
                                     </i>
                                 </div>
                                 <div>
@@ -60,19 +86,18 @@ class CreateStudentPage extends Component {
                         <div className="col-md-12">
                             <div className="main-card mb-3 card">
                                 <div className="card-body">
-                                    {/* <h5 className="card-title">Controls Types</h5> */}
                                     <form className="">
                                         <div className="row">
                                             <div className="col-md-6">
                                                 <div className="position-relative form-group">
                                                     <label className="">First Name</label>
-                                                    <input name="firstname" onChange={this.onChange} placeholder="First Name" type="text" className="form-control" />
+                                                    <input name="firstname" value={this.state.firstname} onChange={this.onChange} placeholder="First Name" type="text" className="form-control" />
                                                 </div>
                                             </div>
                                             <div className="col-md-6">
                                                 <div className="position-relative form-group">
                                                     <label className="">Last Name</label>
-                                                    <input name="lastname" onChange={this.onChange} placeholder="Last Name" type="text" className="form-control" />
+                                                    <input name="lastname" value={this.state.lastname} onChange={this.onChange} placeholder="Last Name" type="text" className="form-control" />
                                                 </div>
                                             </div>
                                         </div>
@@ -80,13 +105,13 @@ class CreateStudentPage extends Component {
                                             <div className="col-md-6">
                                                 <div className="position-relative form-group">
                                                     <label className="">Bith date</label>
-                                                    <input name="birthdate" onChange={this.onChange} placeholder="dd/mm/yyyy" type="date" className="form-control" />
+                                                    <input name="birthdate" value={this.state.birthdate} onChange={this.onChange} placeholder="dd/mm/yyyy" type="date" className="form-control" />
                                                 </div>
                                             </div>
                                             <div className="col-md-6">
                                                 <div className="position-relative form-group">
                                                     <label className="">Email</label>
-                                                    <input name="email" onChange={this.onChange} placeholder="Email" type="email" className="form-control" />
+                                                    <input name="email" value={this.state.email} onChange={this.onChange} placeholder="Email" type="email" className="form-control" />
                                                 </div>
                                             </div>
                                         </div>
@@ -94,13 +119,13 @@ class CreateStudentPage extends Component {
                                             <div className="col-md-6">
                                                 <div className="position-relative form-group">
                                                     <label className="">Postal Address</label>
-                                                    <input name="postaladress" onChange={this.onChange} placeholder="Postal Address" type="text" className="form-control" />
+                                                    <input name="postaladress" value={this.state.postaladress} onChange={this.onChange} placeholder="Postal Address" type="text" className="form-control" />
                                                 </div>
                                             </div>
                                             <div className="col-md-6">
                                                 <div className="position-relative form-group">
                                                     <label className="">Nationality</label>
-                                                    <input name="nationality" onChange={this.onChange} placeholder="Nationality" type="text" className="form-control" />
+                                                    <input name="nationality" value={this.state.nationality} onChange={this.onChange} placeholder="Nationality" type="text" className="form-control" />
                                                 </div>
                                             </div>
                                         </div>
@@ -108,7 +133,7 @@ class CreateStudentPage extends Component {
                                             <div className="col-md-6">
                                                 <div className="position-relative form-group">
                                                     <label className="">NIC</label>
-                                                    <input name="nic" onChange={this.onChange} placeholder="NIC" type="text" className="form-control" />
+                                                    <input name="nic" value={this.state.nic} onChange={this.onChange} placeholder="NIC" type="text" className="form-control" />
                                                 </div>
                                             </div>
                                         </div>

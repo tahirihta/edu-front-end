@@ -1,8 +1,8 @@
 /* eslint-disable react/no-multi-comp */
 /* eslint-disable react/display-name */
 /* eslint-disable */
-import React, { lazy } from "react";
-import { Redirect } from "react-router-dom";
+import React, { lazy } from 'react';
+import { Redirect } from 'react-router-dom';
 import HomePage from "./pages/HomePage";
 import AdminLayout from "./pages/admindashboard/layouts/AdminLayout";
 import AdminDashboardPage from "./pages/admindashboard/AdminDashboardPage";
@@ -55,6 +55,23 @@ const routes = [
                 component: lazy(() =>
                     import("./pages/admindashboard/CreateStudentPage")
                 )
+            },
+            {
+                path: "/dashboard/admin/search-student",
+                exact: true,
+                component: lazy(() =>
+                    import("./pages/admindashboard/SearchStudentPage")
+                )
+            },
+            {
+                path: "/dashboard/admin/search-student-credential",
+                exact: true,
+                component: lazy(() =>
+                    import("./pages/admindashboard/SearchStudentCredentialPage")
+                )
+            },
+            {
+                component: () => <Redirect to="/errors/error-404" />
             }
         ]
     },
@@ -122,11 +139,11 @@ const routes = [
                 component: lazy(() =>
                     import("./pages/studentdashboard/RevokePublishDiplomaPage")
                 )
-            }
+            },
         ]
     },
     {
-        path: "*",
+        path: "/errors/error-404",
         component: ErrorPage
     }
 ];

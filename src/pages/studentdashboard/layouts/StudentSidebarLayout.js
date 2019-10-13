@@ -131,40 +131,58 @@ class StudentSidebarLayout extends React.Component {
                                             </a>
                                         </li>
                                         <li>
-                                            <Link to="/dashboard/student/all-diploma">
-                                                <i className="metismenu-icon pe-7s-graph"></i>
-                                                All Diploma
-                                            </Link>
+                                            <a href="#">
+                                                <i className="metismenu-icon pe-7s-browser"></i>
+                                                Credentials
+                                                <i className="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                                            </a>
+                                            <ul>
+                                                <li>
+                                                    <Link to="/dashboard/student/all-diploma">
+                                                        <i className="metismenu-icon pe-7s-graph"></i>
+                                                        All Diplomas
+                                                    </Link>
+                                                </li>
+                                                <li>
+                                                    <Link to="/dashboard/student/all-certification">
+                                                        <i className="metismenu-icon pe-7s-graph"></i>
+                                                        All Certifications
+                                                    </Link>
+                                                </li>
+                                                <li>
+                                                    <Link to="/dashboard/student/all-standards">
+                                                        <i className="metismenu-icon pe-7s-graph"></i>
+                                                        All Standards
+                                                    </Link>
+                                                </li>
+                                            </ul>
                                         </li>
                                         <li>
-                                            <Link to="/dashboard/student/all-publish-diploma">
-                                                <i className="metismenu-icon pe-7s-graph"></i>
-                                                All Publish Diploma
-                                            </Link>
-                                        </li>
-                                        <li>
-                                            <Link to="/dashboard/student/all-revoke-diploma">
-                                                <i className="metismenu-icon pe-7s-graph"></i>
-                                                All Revoke Diploma
-                                            </Link>
-                                        </li>
-                                        <li>
-                                            <Link to="/dashboard/student/all-certification">
-                                                <i className="metismenu-icon pe-7s-graph"></i>
-                                                All Certifications
-                                            </Link>
-                                        </li>
-                                        <li>
-                                            <Link to="/dashboard/student/all-standards">
-                                                <i className="metismenu-icon pe-7s-graph"></i>
-                                                All Standards
-                                            </Link>
-                                        </li>
-                                        <li>
-                                            <Link to="/dashboard/student/revoke-publish-diploma">
-                                                <i className="metismenu-icon pe-7s-graph"></i>
-                                                Revoke and Publish Diploma
-                                            </Link>
+                                            <a href="#">
+                                                <i className="metismenu-icon pe-7s-browser"></i>
+                                                Publish-Revoke
+                                                <i className="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                                            </a>
+                                            <ul>
+                                                <li>
+                                                    <Link to="/dashboard/student/all-publish-diploma">
+                                                        <i className="metismenu-icon pe-7s-graph"></i>
+                                                        All Published Diploma
+                                                    </Link>
+                                                </li>
+                                                <li>
+                                                    <Link to="/dashboard/student/all-revoke-diploma">
+                                                        <i className="metismenu-icon pe-7s-graph"></i>
+                                                        All Revoked Diploma
+                                                    </Link>
+                                                </li>
+                                                <li>
+                                                    <Link to="/dashboard/student/revoke-publish-diploma">
+                                                        <i className="metismenu-icon pe-7s-graph"></i>
+                                                        Revoke and Publish Diploma
+                                                    </Link>
+                                                </li>
+                                            </ul>
                                         </li>
                                         <li>
                                             <a

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 class AdminDashboardPage extends Component {
     componentDidMount() {
-        document.title = "Admin Dashboard";
+        document.title = "University Dashboard";
     }
 
     render() {

@@ -10,7 +10,8 @@ class RevokePublishDiplomaPage extends Component {
 
     state = {
         digitalCredId: "",
-        sharedId: ""
+        sharedId: "",
+        modal: false
     };
 
     onChange = (e) => this.setState({[e.target.name]: e.target.value});
@@ -41,6 +42,13 @@ class RevokePublishDiplomaPage extends Component {
             .catch(err => toastr.success("Something wrong"));
     };
 
+    toggle = e => {
+        e.preventDefault();
+
+        this.setState({
+            modal: !this.state.modal
+        });
+    };
 
     render() {
         return (
@@ -73,7 +81,8 @@ class RevokePublishDiplomaPage extends Component {
                                                 </div>
                                             </div>
                                         </div>
-                                        <button className="mt-1 btn btn-primary" onClick={this.onSubmitPublish}>Publish</button>
+                                        <button className="mt-1 btn btn-primary" onClick={this.onSubmitPublish}>Publish</button>{' '}
+                                        <button className="mt-1 btn btn-success" onClick={this.toggle}>Search Diploma</button>
                                     </form>
                                 </div>
                             </div>
@@ -91,7 +100,7 @@ class RevokePublishDiplomaPage extends Component {
                                                 </div>
                                             </div>
                                         </div>
-                                        <button className="mt-1 btn btn-primary" onClick={this.onSubmitRevoke}>Revoke</button>
+                                        <button className="mt-1 btn btn-danger" onClick={this.onSubmitRevoke}>Revoke</button>
                                     </form>
                                 </div>
                             </div>

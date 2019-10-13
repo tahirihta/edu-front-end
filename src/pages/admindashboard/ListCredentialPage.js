@@ -15,6 +15,7 @@ class ListCredentialPage extends Component {
             "http://d24w27cd80vt93.cloudfront.net/api/digCred/search"
         );
         let { data } = await res;
+        console.log(data);
         this.setState({ credentials: data });
     };
 
@@ -56,7 +57,7 @@ class ListCredentialPage extends Component {
                         <div className="page-title-wrapper">
                             <div className="page-title-heading">
                                 <div className="page-title-icon">
-                                    <i className="pe-7s-car icon-gradient bg-mean-fruit"></i>
+                                    <i className="fas fa-atom icon-gradient bg-mean-fruit"></i>
                                 </div>
                                 <div>All Credentials</div>
                             </div>

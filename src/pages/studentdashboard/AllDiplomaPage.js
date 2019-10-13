@@ -7,17 +7,23 @@ import { columns } from "../../columns";
 class AllDiplomaPage extends Component {
     state = {
         diplomas: [],
-        rows: []
+        rows: [],
+        student: null
     };
 
     componentDidMount() {
         document.title = "List of diploma";
 
+        if (localStorage.studentInfo) {
+            const student = JSON.parse(localStorage.studentInfo);
+            this.setState({ student: student });
+        }
+
         Axios.get("http://d24w27cd80vt93.cloudfront.net/api/shared")
             .then(res => {
                 this.setState({
                     diplomas: res.data.filter(
-                        x => x.type_digital_credential === "DIPLOMA" || x.type_digital_credential === "Diploma"
+                        x => (x.type_digital_credential === "DIPLOMA" || x.type_digital_credential === "Diploma") && x.studentid === this.state.student.studentid
                     )
                 });
             })
