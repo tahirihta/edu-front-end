@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Axios from "axios";
 import toastr from "toastr";
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 
 class PublishDiplomaPage extends Component {
     componentDidMount() {
@@ -9,8 +10,8 @@ class PublishDiplomaPage extends Component {
 
     state = {
         digitalCredId: "",
-        sharedId: "",
-        modal: false
+        modal: false,
+        diplomas: []
     };
 
     onChange = e => this.setState({ [e.target.name]: e.target.value });
@@ -33,12 +34,35 @@ class PublishDiplomaPage extends Component {
             .catch(err => toastr.success("Something wrong"));
     };
 
-    toggle = e => {
+    onValidate = e => {
         e.preventDefault();
 
         this.setState({
             modal: !this.state.modal
         });
+    };
+
+    toggle = e => {
+        e.preventDefault();
+
+        this.setState(
+            {
+                modal: !this.state.modal
+            },
+            () => {
+                if (this.state.modal) {
+                    Axios.post(
+                        "http://d24w27cd80vt93.cloudfront.net/api/digCred/search"
+                    )
+                        .then(res => {
+                            this.setState({
+                                diplomas: res.data
+                            });
+                        })
+                        .catch(err => toastr.error("Something went wromg"));
+                }
+            }
+        );
     };
 
     render() {
@@ -68,6 +92,7 @@ class PublishDiplomaPage extends Component {
                                                         Digital Credential Id
                                                     </label>
                                                     <input
+                                                        readOnly
                                                         name="digitalCredId"
                                                         value={
                                                             this.state
@@ -98,6 +123,59 @@ class PublishDiplomaPage extends Component {
                             </div>
                         </div>
                     </div>
+                    <span className="d-inline-block mb-2 mr-2">
+                        <Modal isOpen={this.state.modal} toggle={this.toggle}>
+                            <ModalHeader toggle={this.toggle}>
+                                List of Credentials
+                            </ModalHeader>
+                            <ModalBody>
+                                <form className="">
+                                    <div className="row">
+                                        <div className="col-md-12">
+                                            <div className="position-relative form-group">
+                                                <label className="">
+                                                    Select Diploma
+                                                </label>
+                                                <select
+                                                    name="digitalCredId"
+                                                    value={
+                                                        this.state.digitalCredId
+                                                    }
+                                                    onChange={this.onChange}
+                                                    className="form-control"
+                                                >
+                                                    {this.state.diplomas.map(
+                                                        (value, index) => {
+                                                            return (
+                                                                <option
+                                                                    key={index}
+                                                                    value={
+                                                                        value.digitalcredid
+                                                                    }
+                                                                >
+                                                                    {
+                                                                        value.digitalcredid
+                                                                    }
+                                                                </option>
+                                                            );
+                                                        }
+                                                    )}
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </ModalBody>
+                            <ModalFooter>
+                                <Button
+                                    color="primary"
+                                    onClick={this.onValidate}
+                                >
+                                    Validate
+                                </Button>
+                            </ModalFooter>
+                        </Modal>
+                    </span>
                 </div>
             </div>
         );

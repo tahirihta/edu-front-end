@@ -19,24 +19,28 @@ class ListRevokeDiplomaPage extends Component {
                 student.studentid
         )
             .then(res => {
-                this.setState({
-                    diplomas: res.data
-                });
+                this.setState(
+                    {
+                        diplomas: res.data
+                    },
+                    () => {
+                        this.state.diplomas.forEach((value, index) => {
+                            this.state.rows.push({
+                                digitalcredid: value.digitalcredid,
+                                firstname: value.firstname,
+                                lastname: value.lastname,
+                                email: value.email,
+                                programname: value.programname,
+                                postaladress: value.postaladress,
+                                nic: value.nic
+                            });
+                        });
+                    }
+                );
             })
             .catch(err => toastr.warning("Something wrong!"));
     }
     render() {
-        this.state.diplomas.forEach((value, index) => {
-            this.state.rows.push({
-                digitalcredid: value.digitalcredid,
-                firstname: value.firstname,
-                lastname: value.lastname,
-                email: value.email,
-                programname: value.programname,
-                postaladress: value.postaladress,
-                nic: value.nic
-            });
-        });
         const data = {
             columns: columns,
             rows: this.state.rows

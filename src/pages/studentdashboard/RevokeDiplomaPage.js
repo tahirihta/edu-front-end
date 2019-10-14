@@ -1,16 +1,17 @@
 import React, { Component } from "react";
 import Axios from "axios";
 import toastr from "toastr";
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 
 class RevokeDiplomaPage extends Component {
     componentDidMount() {
-        document.title = "Publish Diploma";
+        document.title = "Revoke Diploma";
     }
 
     state = {
-        digitalCredId: "",
         sharedId: "",
-        modal: false
+        modal: false,
+        diplomas: []
     };
 
     onChange = e => this.setState({ [e.target.name]: e.target.value });
@@ -18,17 +19,47 @@ class RevokeDiplomaPage extends Component {
     onSubmitRevoke = e => {
         e.preventDefault();
 
-        Axios.delete(
-            `http://d24w27cd80vt93.cloudfront.net/api/shared/revoke/${this.state.sharedId}`
-        )
-            .then(res => {
-                toastr.success("Diploma successfully revoked");
-                this.setState({ sharedId: "" });
-            })
-            .catch(err => toastr.success("Something wrong"));
+        if (this.state.sharedId) {
+            Axios.delete(
+                `http://d24w27cd80vt93.cloudfront.net/api/shared/revoke/${this.state.sharedId}`
+            )
+                .then(res => {
+                    toastr.success("Diploma successfully revoked");
+                    this.setState({ sharedId: "" });
+                })
+                .catch(err => toastr.warning("Something wrong"));
+        } else {
+            toastr.warning("Field is mandatory");
+        }
     };
 
     toggle = e => {
+        e.preventDefault();
+
+        const student = JSON.parse(localStorage.studentInfo);
+
+        this.setState(
+            {
+                modal: !this.state.modal
+            },
+            () => {
+                if (this.state.modal) {
+                    Axios.get(
+                        "http://d24w27cd80vt93.cloudfront.net/api/shared/listAll/" +
+                            student.studentid
+                    )
+                        .then(res => {
+                            this.setState({
+                                diplomas: res.data
+                            });
+                        })
+                        .catch(err => toastr.error("Something went wromg"));
+                }
+            }
+        );
+    };
+
+    onValidate = e => {
         e.preventDefault();
 
         this.setState({
@@ -46,7 +77,7 @@ class RevokeDiplomaPage extends Component {
                                 <div className="page-title-icon">
                                     <i className="fas fa-atom icon-gradient bg-mean-fruit"></i>
                                 </div>
-                                <div>Publish Diploma</div>
+                                <div>Revoke Diploma</div>
                             </div>
                         </div>
                     </div>
@@ -80,12 +111,69 @@ class RevokeDiplomaPage extends Component {
                                             onClick={this.onSubmitRevoke}
                                         >
                                             Revoke
+                                        </button>{" "}
+                                        <button
+                                            className="mt-1 btn btn-success"
+                                            onClick={this.toggle}
+                                        >
+                                            List Published Diploma
                                         </button>
                                     </form>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <span className="d-inline-block mb-2 mr-2">
+                        <Modal isOpen={this.state.modal} toggle={this.toggle}>
+                            <ModalHeader toggle={this.toggle}>
+                                List of Published Diploma
+                            </ModalHeader>
+                            <ModalBody>
+                                <form className="">
+                                    <div className="row">
+                                        <div className="col-md-12">
+                                            <div className="position-relative form-group">
+                                                <label className="">
+                                                    Select Diploma
+                                                </label>
+                                                <select
+                                                    name="sharedId"
+                                                    value={this.state.sharedId}
+                                                    onChange={this.onChange}
+                                                    className="form-control"
+                                                >
+                                                    {this.state.diplomas.map(
+                                                        (value, index) => {
+                                                            return (
+                                                                <option
+                                                                    key={index}
+                                                                    value={
+                                                                        value.sharedcredid
+                                                                    }
+                                                                >
+                                                                    {
+                                                                        value.sharedcredid
+                                                                    }
+                                                                </option>
+                                                            );
+                                                        }
+                                                    )}
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </ModalBody>
+                            <ModalFooter>
+                                <Button
+                                    color="primary"
+                                    onClick={this.onValidate}
+                                >
+                                    Validate
+                                </Button>
+                            </ModalFooter>
+                        </Modal>
+                    </span>
                 </div>
             </div>
         );

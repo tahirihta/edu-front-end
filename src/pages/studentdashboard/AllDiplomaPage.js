@@ -8,41 +8,46 @@ class AllDiplomaPage extends Component {
     state = {
         diplomas: [],
         rows: [],
-        student: null
+        student: {}
     };
 
     componentDidMount() {
         document.title = "List of diploma";
 
-        if (localStorage.studentInfo) {
+        if (localStorage.studentInfo !== undefined) {
             const student = JSON.parse(localStorage.studentInfo);
             this.setState({ student: student });
         }
 
-        Axios.get("http://d24w27cd80vt93.cloudfront.net/api/shared")
+        Axios.post("http://d24w27cd80vt93.cloudfront.net/api/digCred/search")
             .then(res => {
-                this.setState({
-                    diplomas: res.data.filter(
-                        x =>
-                            (x.type_digital_credential === "DIPLOMA" ||
-                                x.type_digital_credential === "Diploma") && x.studentid === this.state.student.studentid
-                    )
-                });
+                this.setState(
+                    {
+                        diplomas: res.data.filter(
+                            x =>
+                                (x.type_digital_credential === "DIPLOMA" ||
+                                    x.type_digital_credential === "Diploma") &&
+                                x.studentid === this.state.student.studentid
+                        )
+                    },
+                    () => {
+                        this.state.diplomas.forEach((value, index) => {
+                            this.state.rows.push({
+                                digitalcredid: value.digitalcredid,
+                                firstname: value.firstname,
+                                lastname: value.lastname,
+                                email: value.email,
+                                programname: value.programname,
+                                postaladress: value.postaladress,
+                                nic: value.nic
+                            });
+                        });
+                    }
+                );
             })
             .catch(err => toastr.warning("Something wrong!"));
     }
     render() {
-        this.state.diplomas.forEach((value, index) => {
-            this.state.rows.push({
-                digitalcredid: value.digitalcredid,
-                firstname: value.firstname,
-                lastname: value.lastname,
-                email: value.email,
-                programname: value.programname,
-                postaladress: value.postaladress,
-                nic: value.nic
-            });
-        });
         const data = {
             columns: columns,
             rows: this.state.rows

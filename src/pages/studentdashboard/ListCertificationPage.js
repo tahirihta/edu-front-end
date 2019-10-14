@@ -7,36 +7,49 @@ import { columns } from "../../columns";
 class ListCertificationPage extends Component {
     state = {
         certifications: [],
-        rows: []
+        rows: [],
+        student: {}
     };
 
     componentDidMount() {
         document.title = "List of certifications";
 
-        Axios.get("http://d24w27cd80vt93.cloudfront.net/api/shared")
+        if (localStorage.studentInfo !== undefined) {
+            const student = JSON.parse(localStorage.studentInfo);
+            this.setState({ student: student });
+        }
+
+        Axios.post("http://d24w27cd80vt93.cloudfront.net/api/digCred/search")
             .then(res => {
-                this.setState({
-                    certifications: res.data.filter(
-                        x =>
-                            x.type_digital_credential === "Certification" ||
-                            x.type_digital_credential === "CERTIFICATION"
-                    )
-                });
+                this.setState(
+                    {
+                        certifications: res.data.filter(
+                            x =>
+                                (x.type_digital_credential ===
+                                    "Certification" ||
+                                    x.type_digital_credential ===
+                                        "CERTIFICATION") &&
+                                x.studentid === this.state.student.studentid
+                        )
+                    },
+                    () => {
+                        this.state.certifications.forEach((value, index) => {
+                            this.state.rows.push({
+                                digitalcredid: value.digitalcredid,
+                                firstname: value.firstname,
+                                lastname: value.lastname,
+                                email: value.email,
+                                programname: value.programname,
+                                postaladress: value.postaladress,
+                                nic: value.nic
+                            });
+                        });
+                    }
+                );
             })
             .catch(err => toastr.warning("Something wrong!"));
     }
     render() {
-        this.state.certifications.forEach((value, index) => {
-            this.state.rows.push({
-                digitalcredid: value.digitalcredid,
-                firstname: value.firstname,
-                lastname: value.lastname,
-                email: value.email,
-                programname: value.programname,
-                postaladress: value.postaladress,
-                nic: value.nic
-            });
-        });
         const data = {
             columns: columns,
             rows: this.state.rows

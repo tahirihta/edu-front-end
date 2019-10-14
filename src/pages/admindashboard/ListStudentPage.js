@@ -16,22 +16,22 @@ class ListStudentPage extends Component {
             "http://d24w27cd80vt93.cloudfront.net/api/student/list"
         );
         let { data } = await res;
-        this.setState({ students: data });
+        this.setState({ students: data }, () => {
+            this.state.students.forEach((value, index) => {
+                this.state.rows.push({
+                    digitalcredid: value.studentid,
+                    firstname: value.firstname,
+                    lastname: value.lastname,
+                    email: value.email,
+                    nationality: value.nationality,
+                    postaladress: value.postaladress,
+                    nic: value.nic
+                });
+            });
+        });
     }
 
     render() {
-        this.state.students.forEach((value, index) => {
-            this.state.rows.push({
-                digitalcredid: value.studentid,
-                firstname: value.firstname,
-                lastname: value.lastname,
-                email: value.email,
-                nationality: value.nationality,
-                postaladress: value.postaladress,
-                nic: value.nic
-            });
-        });
-
         const data = {
             columns: studentColumns,
             rows: this.state.rows

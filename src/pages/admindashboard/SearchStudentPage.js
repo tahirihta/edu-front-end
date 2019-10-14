@@ -52,7 +52,7 @@ class SearchStudentPage extends Component {
                     toastr.error("No student found with this information!");
                 }
             })
-            .catch(err => console.log(err));
+            .catch(err => toastr.warning("Something went wrong"));
     };
 
     render() {

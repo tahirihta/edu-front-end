@@ -5,21 +5,44 @@ import { MDBDataTable } from "mdbreact";
 
 class ListStandardPage extends Component {
     state = {
-        standards: []
+        standards: [],
+        rows: [],
+        student: {}
     };
 
     componentDidMount() {
         document.title = "List of standards";
 
-        Axios.get("http://d24w27cd80vt93.cloudfront.net/api/shared")
+        if (localStorage.studentInfo !== undefined) {
+            const student = JSON.parse(localStorage.studentInfo);
+            this.setState({ student: student });
+        }
+
+        Axios.post("http://d24w27cd80vt93.cloudfront.net/api/digCred/search")
             .then(res => {
-                this.setState({
-                    standards: res.data.filter(
-                        x =>
-                            x.type_digital_credential === "Standard" ||
-                            x.type_digital_credential === "STANDARD"
-                    )
-                });
+                this.setState(
+                    {
+                        standards: res.data.filter(
+                            x =>
+                                (x.type_digital_credential === "Standard" ||
+                                    x.type_digital_credential === "STANDARD") &&
+                                x.studentid === this.state.student.studentid
+                        )
+                    },
+                    () => {
+                        this.state.standards.forEach((value, index) => {
+                            this.state.rows.push({
+                                digitalcredid: value.digitalcredid,
+                                firstname: value.firstname,
+                                lastname: value.lastname,
+                                email: value.email,
+                                programname: value.programname,
+                                postaladress: value.postaladress,
+                                nic: value.nic
+                            });
+                        });
+                    }
+                );
             })
             .catch(err => toastr.warning("Something wrong!"));
     }
@@ -62,7 +85,7 @@ class ListStandardPage extends Component {
                     sort: "asc"
                 }
             ],
-            rows: this.state.standards
+            rows: this.state.rows
         };
         // const standardsTable = this.state.standards.map((diploma, index) => {
         //     return (
