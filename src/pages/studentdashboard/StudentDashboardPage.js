@@ -3,6 +3,12 @@ import React, { Component } from "react";
 class StudentDashboardPage extends Component {
 
     componentDidMount() {
+        if (
+            !localStorage.studentInfo &&
+            localStorage.studentInfo === undefined
+        ) {
+            this.props.history.push("/student-login");
+        }
         document.title = "Student dashboard";
     }
 
@@ -13,7 +19,7 @@ class StudentDashboardPage extends Component {
                         <div className="page-title-wrapper">
                             <div className="page-title-heading">
                                 <div className="page-title-icon">
-                                    <i className="pe-7s-car icon-gradient bg-mean-fruit"></i>
+                                    <i className="fas fa-graduation-cap icon-gradient bg-mean-fruit"></i>
                                 </div>
                                 <div>Dashboard</div>
                             </div>

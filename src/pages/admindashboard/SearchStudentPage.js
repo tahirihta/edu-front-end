@@ -2,6 +2,8 @@
 import React, { Component } from "react";
 import axios from 'axios';
 import toastr from 'toastr';
+import {Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
+import * as moment from 'moment';
 
 class SearchStudentPage extends Component {
 
@@ -9,6 +11,8 @@ class SearchStudentPage extends Component {
         firstname: "",
         lastname: "",
         birthdate: "",
+        modal: false,
+        student: {}
     };
 
     componentDidMount() {
@@ -16,6 +20,17 @@ class SearchStudentPage extends Component {
     }
 
     onChange = (e) => this.setState({[e.target.name]: e.target.value});
+
+    toggle = e => {
+        e.preventDefault();
+
+        this.setState({
+            modal: !this.state.modal,
+            firstname: "",
+            lastname: "",
+            birthdate: "",
+        });
+    }
 
     onSubmit = (e) => {
         e.preventDefault();
@@ -28,6 +43,10 @@ class SearchStudentPage extends Component {
 
         axios.post("http://d24w27cd80vt93.cloudfront.net/api/student/search", data).then(res => {
                 if(res.data.length > 0) {
+                    this.setState({
+                        student: res.data[0],
+                        modal: true
+                    });
                     toastr.success("Found student with this information!");
                 } else {
                     toastr.error("No student found with this information!");
@@ -86,6 +105,130 @@ class SearchStudentPage extends Component {
                             </div>
                         </div>
                     </div>
+                    <span className="d-inline-block mb-2 mr-2">
+                        <Modal isOpen={this.state.modal} toggle={this.toggle}>
+                            <ModalHeader toggle={this.toggle}>Found student</ModalHeader>
+                            <ModalBody>
+                                <form className="">
+                                    <div className="row">
+                                        <div className="col-md-6">
+                                            <div className="position-relative form-group">
+                                                <label className="">
+                                                    First Name
+                                                </label>
+                                                <input
+                                                    defaultValue={this.state.student.firstname}
+                                                    placeholder="First Name"
+                                                    type="text"
+                                                    className="form-control"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="col-md-6">
+                                            <div className="position-relative form-group">
+                                                <label className="">
+                                                    Last Name
+                                                </label>
+                                                <input
+                                                    defaultValue={this.state.student.lastname}
+                                                    placeholder="Last Name"
+                                                    type="text"
+                                                    className="form-control"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="row">
+                                        <div className="col-md-6">
+                                            <div className="position-relative form-group">
+                                                <label className="">
+                                                    Student Id
+                                                </label>
+                                                <input
+                                                    defaultValue={this.state.student.studentid}
+                                                    placeholder="Student Id"
+                                                    type="text"
+                                                    className="form-control"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="col-md-6">
+                                            <div className="position-relative form-group">
+                                                <label className="">
+                                                    Email
+                                                </label>
+                                                <input
+                                                    defaultValue={this.state.student.email}
+                                                    placeholder="Email"
+                                                    type="text"
+                                                    className="form-control"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="row">
+                                        <div className="col-md-6">
+                                            <div className="position-relative form-group">
+                                                <label className="">
+                                                   Nationality
+                                                </label>
+                                                <input
+                                                    defaultValue={this.state.student.nationality}
+                                                    placeholder="Nationality"
+                                                    type="text"
+                                                    className="form-control"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="col-md-6">
+                                            <div className="position-relative form-group">
+                                                <label className="">
+                                                    NIC
+                                                </label>
+                                                <input
+                                                    defaultValue={this.state.student.nic}
+                                                    placeholder="Email"
+                                                    type="text"
+                                                    className="form-control"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="row">
+                                        <div className="col-md-6">
+                                            <div className="position-relative form-group">
+                                                <label className="">
+                                                    Bith date
+                                                </label>
+                                                <input
+                                                    defaultValue={moment(this.state.student.birthdate, 'mm/dd/yyyy').format()}
+                                                    placeholder="mm/dd/yyyy"
+                                                    type="date"
+                                                    className="form-control"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="col-md-6">
+                                            <div className="position-relative form-group">
+                                                <label className="">
+                                                    Postal Address
+                                                </label>
+                                                <input
+                                                    defaultValue={this.state.student.postaladress}
+                                                    placeholder=" Postal Address"
+                                                    type="text"
+                                                    className="form-control"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </ModalBody>
+                            <ModalFooter>
+                                <Button color="primary" onClick={this.toggle}>Done</Button>
+                            </ModalFooter>
+                        </Modal>
+                    </span>
                 </div>
             </div>
         );

@@ -35,12 +35,16 @@ class StudentLoginPage extends Component {
                 data
             )
                 .then(res => {
-                    toastr.success("Successfully logged in");
-                    localStorage.setItem(
-                        "studentInfo",
-                        JSON.stringify(res.data[0])
-                    );
-                    location.href = "/dashboard/student";
+                    if(res.data.length > 0) {
+                        toastr.success("Successfully logged in");
+                        localStorage.setItem(
+                            "studentInfo",
+                            JSON.stringify(res.data[0])
+                        );
+                        location.href = "/dashboard/student";
+                    } else {
+                        toastr.error("Invalid credentials. Try again later.");
+                    }
                     // this.props.history.push("/dashboard/student");
                 })
                 .catch(err => {

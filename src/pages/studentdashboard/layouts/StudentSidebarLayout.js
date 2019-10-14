@@ -8,9 +8,11 @@ class StudentSidebarLayout extends React.Component {
     };
 
     componentDidMount() {
-        if (localStorage.studentInfo) {
+        if (localStorage.studentInfo !== undefined) {
             const student = JSON.parse(localStorage.studentInfo);
             this.setState({ student: student });
+        } else {
+            this.props.history.push("/student-login");
         }
     }
 
@@ -23,9 +25,9 @@ class StudentSidebarLayout extends React.Component {
         return (
             <div>
                 <div className="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
-                    <div className="app-header header-shadow">
+                    <div className="app-header header-shadow bg-mean-fruit header-text-light">
                         <div className="app-header__logo">
-                            <div className="logo-src"></div>
+                            <div className="logo-src" style={{marginLeft: 55}}></div>
                             <div className="header__pane ml-auto"></div>
                         </div>
                         <div className="app-header__mobile-menu">
@@ -77,7 +79,7 @@ class StudentSidebarLayout extends React.Component {
                         </div>
                     </div>
                     <div className="app-main">
-                        <div className="app-sidebar sidebar-shadow">
+                        <div className="app-sidebar sidebar-shadow bg-mean-fruit sidebar-text-dark">
                             <div className="app-header__logo">
                                 <div className="logo-src"></div>
                                 <div className="header__pane ml-auto">

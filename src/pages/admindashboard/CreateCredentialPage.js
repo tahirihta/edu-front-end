@@ -52,7 +52,16 @@ class CreateCredentialPage extends Component {
                 "attributionDate": this.state.attributionDate,
                 "type_digital_credential": this.state.type_digital_credential
             })
-            .then(res => toastr.success("Credential successfully created!"))
+            .then(res => {
+                toastr.success("Credential successfully created!");
+                this.setState({
+                    studentId: "",
+                    university: "",
+                    programName: "",
+                    attributionDate: "",
+                    type_digital_credential: "",
+                })
+            })
             .catch(err => toastr.success("Someting wrong! Please check your inputs."));
         } else {
             toastr.warning("All fields are mandatory");
@@ -145,8 +154,8 @@ class CreateCredentialPage extends Component {
                                             </div>
                                             <div className="col-md-6">
                                                 <div className="position-relative form-group">
-                                                    <label className="">Email</label>
-                                                    <input name="email" onChange={this.onChange} required defaultValue={this.state.email} placeholder="Enter Email" type="email" className="form-control" />
+                                                    <label className="">Upload Credential</label>
+                                                    <input type="file" className="form-control" />
                                                 </div>
                                             </div>
                                         </div>

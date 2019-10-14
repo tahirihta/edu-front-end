@@ -43,6 +43,7 @@ class ListCredentialPage extends Component {
                     <td>{credential.programname}</td>
                     <td>{credential.postaladress}</td>
                     <td>{credential.nic}</td>
+                    <td>{credential.type_digital_credential}</td>
                     <td>
                         <button type="button" className="btn btn-primary" onClick={this.onRevoke(credential.digitalcredid)}>Revoke</button>
                     </td>
@@ -70,24 +71,25 @@ class ListCredentialPage extends Component {
                                     <h5 className="card-title">
                                         List of credentials
                                     </h5>
-                                    <table
-                                        id="example"
-                                        className="mb-0 table table-striped"
-                                    >
-                                        <thead>
-                                            <tr>
-                                                <th>#Digital Id</th>
-                                                <th>First Name</th>
-                                                <th>Last Name</th>
-                                                <th>Email</th>
-                                                <th>Program Name</th>
-                                                <th>Postal Address</th>
-                                                <th>NIC</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>{credentialsTable}</tbody>
-                                    </table>
+                                        <table
+                                            id="example"
+                                            className="mb-0 table table-striped"
+                                        >
+                                            <thead>
+                                                <tr>
+                                                    <th>#Digital Id</th>
+                                                    <th>First Name</th>
+                                                    <th>Last Name</th>
+                                                    <th>Email</th>
+                                                    <th>Program Name</th>
+                                                    <th>Postal Address</th>
+                                                    <th>NIC</th>
+                                                    <th>Type Credential</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>{credentialsTable}</tbody>
+                                        </table>
                                 </div>
                             </div>
                         </div>

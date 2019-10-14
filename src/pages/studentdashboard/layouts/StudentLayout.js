@@ -6,7 +6,7 @@ class StudentLayout extends Component {
     componentDidMount() {
         if (
             !localStorage.studentInfo &&
-            localStorage.studentInfo !== undefined
+            localStorage.studentInfo === undefined
         ) {
             this.props.history.push("/student-login");
         }

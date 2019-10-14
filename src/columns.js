@@ -38,7 +38,7 @@ export const columns = [
 
 export const studentColumns = [
     {
-        label: "Digital Id",
+        label: "Student Id",
         field: "digitalcredid",
         sort: "asc",
     },

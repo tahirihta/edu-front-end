@@ -25,8 +25,7 @@ class AllDiplomaPage extends Component {
                     diplomas: res.data.filter(
                         x =>
                             (x.type_digital_credential === "DIPLOMA" ||
-                                x.type_digital_credential === "Diploma") &&
-                            x.studentid === this.state.student.studentid
+                                x.type_digital_credential === "Diploma") && x.studentid === this.state.student.studentid
                     )
                 });
             })

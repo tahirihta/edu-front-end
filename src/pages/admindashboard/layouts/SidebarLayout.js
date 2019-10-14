@@ -23,9 +23,9 @@ class SidebarLayout extends React.Component {
     render() {
         return (
             <div className="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
-                <div className="app-header header-shadow">
+                <div className="app-header header-shadow bg-primary header-text-light">
                     <div className="app-header__logo">
-                        <div className="logo-src"></div>
+                        <div className="logo-src" style={{marginLeft: 55}}></div>
                         <div className="header__pane ml-auto"></div>
                     </div>
                     <div className="app-header__mobile-menu">
@@ -72,7 +72,7 @@ class SidebarLayout extends React.Component {
                     </div>
                 </div>
                 <div className="app-main">
-                    <div className="app-sidebar sidebar-shadow">
+                    <div className="app-sidebar sidebar-shadow bg-primary sidebar-text-light">
                         <div className="app-header__logo">
                             <div className="logo-src"></div>
                             <div className="header__pane ml-auto">
@@ -177,12 +177,6 @@ class SidebarLayout extends React.Component {
                                                     Search Student
                                                 </Link>
                                             </li>
-                                            <li>
-                                                <Link to="/dashboard/admin/search-student-credential">
-                                                    <i className="metismenu-icon pe-7s-graph"></i>
-                                                    Search Student Credential
-                                                </Link>
-                                            </li>
                                         </ul>
                                     </li>
                                     <li>
@@ -202,6 +196,12 @@ class SidebarLayout extends React.Component {
                                                 <Link to="/dashboard/admin/add-credential">
                                                     <i className="metismenu-icon pe-7s-graph"></i>
                                                     Add Credential
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                <Link to="/dashboard/admin/search-student-credential">
+                                                    <i className="metismenu-icon pe-7s-graph"></i>
+                                                    Search Student Credential
                                                 </Link>
                                             </li>
                                         </ul>
