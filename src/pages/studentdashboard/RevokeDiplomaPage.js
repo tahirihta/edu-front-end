@@ -11,7 +11,8 @@ class RevokeDiplomaPage extends Component {
     state = {
         sharedId: "",
         modal: false,
-        diplomas: []
+        diplomas: [],
+        student: {}
     };
 
     onChange = e => this.setState({ [e.target.name]: e.target.value });
@@ -94,6 +95,7 @@ class RevokeDiplomaPage extends Component {
                                                         Shared Id
                                                     </label>
                                                     <input
+                                                        readOnly
                                                         name="sharedId"
                                                         value={
                                                             this.state.sharedId
@@ -124,7 +126,11 @@ class RevokeDiplomaPage extends Component {
                         </div>
                     </div>
                     <span className="d-inline-block mb-2 mr-2">
-                        <Modal isOpen={this.state.modal} toggle={this.toggle}>
+                        <Modal
+                            isOpen={this.state.modal}
+                            toggle={this.toggle}
+                            size="lg"
+                        >
                             <ModalHeader toggle={this.toggle}>
                                 List of Published Diploma
                             </ModalHeader>
@@ -142,6 +148,9 @@ class RevokeDiplomaPage extends Component {
                                                     onChange={this.onChange}
                                                     className="form-control"
                                                 >
+                                                    <option disabled selected>
+                                                        Choose diploma
+                                                    </option>
                                                     {this.state.diplomas.map(
                                                         (value, index) => {
                                                             return (
@@ -151,9 +160,11 @@ class RevokeDiplomaPage extends Component {
                                                                         value.sharedcredid
                                                                     }
                                                                 >
-                                                                    {
-                                                                        value.sharedcredid
-                                                                    }
+                                                                    {value.sharedcredid +
+                                                                        ", " +
+                                                                        value.programname +
+                                                                        ", " +
+                                                                        value.type_digital_credential}
                                                                 </option>
                                                             );
                                                         }

@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import axios from "axios";
 import toastr from "toastr";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
-import * as moment from "moment";
 
 class SearchStudentCredentialPage extends Component {
     state = {
@@ -181,48 +180,14 @@ class SearchStudentCredentialPage extends Component {
                                         <div className="col-md-6">
                                             <div className="position-relative form-group">
                                                 <label className="">
-                                                    First Name
+                                                    Digital Credential Id
                                                 </label>
                                                 <input
                                                     defaultValue={
                                                         this.state.student
-                                                            .firstname
+                                                            .digitalcredid
                                                     }
-                                                    placeholder="First Name"
-                                                    type="text"
-                                                    className="form-control"
-                                                />
-                                            </div>
-                                        </div>
-                                        <div className="col-md-6">
-                                            <div className="position-relative form-group">
-                                                <label className="">
-                                                    Last Name
-                                                </label>
-                                                <input
-                                                    defaultValue={
-                                                        this.state.student
-                                                            .lastname
-                                                    }
-                                                    placeholder="Last Name"
-                                                    type="text"
-                                                    className="form-control"
-                                                />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="row">
-                                        <div className="col-md-6">
-                                            <div className="position-relative form-group">
-                                                <label className="">
-                                                    Student Id
-                                                </label>
-                                                <input
-                                                    defaultValue={
-                                                        this.state.student
-                                                            .studentid
-                                                    }
-                                                    placeholder="Student Id"
+                                                    placeholder="Digital Credential Id"
                                                     type="text"
                                                     className="form-control"
                                                 />
@@ -248,14 +213,48 @@ class SearchStudentCredentialPage extends Component {
                                         <div className="col-md-6">
                                             <div className="position-relative form-group">
                                                 <label className="">
-                                                    Nationality
+                                                    Type of Credential
                                                 </label>
                                                 <input
                                                     defaultValue={
                                                         this.state.student
-                                                            .nationality
+                                                            .type_digital_credential
                                                     }
-                                                    placeholder="Nationality"
+                                                    placeholder="Type of Credential"
+                                                    type="text"
+                                                    className="form-control"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="col-md-6">
+                                            <div className="position-relative form-group">
+                                                <label className="">
+                                                    Program Name
+                                                </label>
+                                                <input
+                                                    defaultValue={
+                                                        this.state.student
+                                                            .programname
+                                                    }
+                                                    placeholder="Program Name"
+                                                    type="text"
+                                                    className="form-control"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="row">
+                                        <div className="col-md-6">
+                                            <div className="position-relative form-group">
+                                                <label className="">
+                                                    Postal Address
+                                                </label>
+                                                <input
+                                                    defaultValue={
+                                                        this.state.student
+                                                            .postaladress
+                                                    }
+                                                    placeholder=" Postal Address"
                                                     type="text"
                                                     className="form-control"
                                                 />
@@ -269,41 +268,6 @@ class SearchStudentCredentialPage extends Component {
                                                         this.state.student.nic
                                                     }
                                                     placeholder="Email"
-                                                    type="text"
-                                                    className="form-control"
-                                                />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="row">
-                                        <div className="col-md-6">
-                                            <div className="position-relative form-group">
-                                                <label className="">
-                                                    Bith date
-                                                </label>
-                                                <input
-                                                    defaultValue={moment(
-                                                        this.state.student
-                                                            .birthdate,
-                                                        "mm/dd/yyyy"
-                                                    ).format()}
-                                                    placeholder="mm/dd/yyyy"
-                                                    type="date"
-                                                    className="form-control"
-                                                />
-                                            </div>
-                                        </div>
-                                        <div className="col-md-6">
-                                            <div className="position-relative form-group">
-                                                <label className="">
-                                                    Postal Address
-                                                </label>
-                                                <input
-                                                    defaultValue={
-                                                        this.state.student
-                                                            .postaladress
-                                                    }
-                                                    placeholder=" Postal Address"
                                                     type="text"
                                                     className="form-control"
                                                 />

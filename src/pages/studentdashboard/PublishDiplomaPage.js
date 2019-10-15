@@ -11,7 +11,8 @@ class PublishDiplomaPage extends Component {
     state = {
         digitalCredId: "",
         modal: false,
-        diplomas: []
+        diplomas: [],
+        student: {}
     };
 
     onChange = e => this.setState({ [e.target.name]: e.target.value });
@@ -45,6 +46,11 @@ class PublishDiplomaPage extends Component {
     toggle = e => {
         e.preventDefault();
 
+        if (localStorage.studentInfo !== undefined) {
+            const student = JSON.parse(localStorage.studentInfo);
+            this.setState({ student: student });
+        }
+
         this.setState(
             {
                 modal: !this.state.modal
@@ -56,7 +62,11 @@ class PublishDiplomaPage extends Component {
                     )
                         .then(res => {
                             this.setState({
-                                diplomas: res.data
+                                diplomas: res.data.filter(
+                                    x =>
+                                        x.studentid ===
+                                        this.state.student.studentid
+                                )
                             });
                         })
                         .catch(err => toastr.error("Something went wromg"));
@@ -124,7 +134,11 @@ class PublishDiplomaPage extends Component {
                         </div>
                     </div>
                     <span className="d-inline-block mb-2 mr-2">
-                        <Modal isOpen={this.state.modal} toggle={this.toggle}>
+                        <Modal
+                            isOpen={this.state.modal}
+                            toggle={this.toggle}
+                            size="lg"
+                        >
                             <ModalHeader toggle={this.toggle}>
                                 List of Credentials
                             </ModalHeader>
@@ -144,6 +158,9 @@ class PublishDiplomaPage extends Component {
                                                     onChange={this.onChange}
                                                     className="form-control"
                                                 >
+                                                    <option disabled selected>
+                                                        Choose diploma
+                                                    </option>
                                                     {this.state.diplomas.map(
                                                         (value, index) => {
                                                             return (
@@ -153,9 +170,11 @@ class PublishDiplomaPage extends Component {
                                                                         value.digitalcredid
                                                                     }
                                                                 >
-                                                                    {
-                                                                        value.digitalcredid
-                                                                    }
+                                                                    {value.digitalcredid +
+                                                                        ", " +
+                                                                        value.programname +
+                                                                        ", " +
+                                                                        value.type_digital_credential}
                                                                 </option>
                                                             );
                                                         }
