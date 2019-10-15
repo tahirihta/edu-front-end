@@ -96,7 +96,7 @@ class PublishDiplomaPage extends Component {
                                     <h4>Publish Diploma</h4>
                                     <form className="">
                                         <div className="row">
-                                            <div className="col-md-12">
+                                            <div className="col-md-6">
                                                 <div className="position-relative form-group">
                                                     <label className="">
                                                         Digital Credential Id
@@ -110,6 +110,19 @@ class PublishDiplomaPage extends Component {
                                                         }
                                                         onChange={this.onChange}
                                                         placeholder="Digital Credential Id"
+                                                        type="text"
+                                                        className="form-control"
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <div className="position-relative form-group">
+                                                    <label className="">
+                                                        Email
+                                                    </label>
+                                                    <input
+                                                        onChange={this.onChange}
+                                                        placeholder="Email"
                                                         type="email"
                                                         className="form-control"
                                                     />
