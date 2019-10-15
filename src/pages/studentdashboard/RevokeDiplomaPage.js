@@ -9,7 +9,7 @@ class RevokeDiplomaPage extends Component {
     }
 
     state = {
-        sharedId: "",
+        sharedId: "Choose diploma",
         modal: false,
         diplomas: [],
         student: {}
@@ -148,7 +148,10 @@ class RevokeDiplomaPage extends Component {
                                                     onChange={this.onChange}
                                                     className="form-control"
                                                 >
-                                                    <option disabled selected>
+                                                    <option
+                                                        disabled
+                                                        defaultValue
+                                                    >
                                                         Choose diploma
                                                     </option>
                                                     {this.state.diplomas.map(

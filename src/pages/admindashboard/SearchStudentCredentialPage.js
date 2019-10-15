@@ -11,7 +11,7 @@ class SearchStudentCredentialPage extends Component {
         programname: "",
         university: "",
         modal: false,
-        student: {}
+        students: []
     };
 
     componentDidMount() {
@@ -39,7 +39,7 @@ class SearchStudentCredentialPage extends Component {
                 if (res.data.length > 0) {
                     this.setState({
                         modal: true,
-                        student: res.data[0]
+                        students: res.data
                     });
                     toastr.success(
                         "Found student credential with this information!"
@@ -66,6 +66,20 @@ class SearchStudentCredentialPage extends Component {
     };
 
     render() {
+        const credentialsTable = this.state.students.map(
+            (credential, index) => {
+                return (
+                    <tr key={index}>
+                        <th scope="row">{credential.digitalcredid}</th>
+                        <td>{credential.email}</td>
+                        <td>{credential.programname}</td>
+                        <td>{credential.postaladress}</td>
+                        <td>{credential.nic}</td>
+                        <td>{credential.type_digital_credential}</td>
+                    </tr>
+                );
+            }
+        );
         return (
             <div className="app-main__outer">
                 <div className="app-main__inner">
@@ -170,111 +184,31 @@ class SearchStudentCredentialPage extends Component {
                         </div>
                     </div>
                     <span className="d-inline-block mb-2 mr-2">
-                        <Modal isOpen={this.state.modal} toggle={this.toggle}>
+                        <Modal
+                            isOpen={this.state.modal}
+                            toggle={this.toggle}
+                            size="lg"
+                        >
                             <ModalHeader toggle={this.toggle}>
                                 Found student credential
                             </ModalHeader>
                             <ModalBody>
-                                <form className="">
-                                    <div className="row">
-                                        <div className="col-md-6">
-                                            <div className="position-relative form-group">
-                                                <label className="">
-                                                    Digital Credential Id
-                                                </label>
-                                                <input
-                                                    defaultValue={
-                                                        this.state.student
-                                                            .digitalcredid
-                                                    }
-                                                    placeholder="Digital Credential Id"
-                                                    type="text"
-                                                    className="form-control"
-                                                />
-                                            </div>
-                                        </div>
-                                        <div className="col-md-6">
-                                            <div className="position-relative form-group">
-                                                <label className="">
-                                                    Email
-                                                </label>
-                                                <input
-                                                    defaultValue={
-                                                        this.state.student.email
-                                                    }
-                                                    placeholder="Email"
-                                                    type="text"
-                                                    className="form-control"
-                                                />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="row">
-                                        <div className="col-md-6">
-                                            <div className="position-relative form-group">
-                                                <label className="">
-                                                    Type of Credential
-                                                </label>
-                                                <input
-                                                    defaultValue={
-                                                        this.state.student
-                                                            .type_digital_credential
-                                                    }
-                                                    placeholder="Type of Credential"
-                                                    type="text"
-                                                    className="form-control"
-                                                />
-                                            </div>
-                                        </div>
-                                        <div className="col-md-6">
-                                            <div className="position-relative form-group">
-                                                <label className="">
-                                                    Program Name
-                                                </label>
-                                                <input
-                                                    defaultValue={
-                                                        this.state.student
-                                                            .programname
-                                                    }
-                                                    placeholder="Program Name"
-                                                    type="text"
-                                                    className="form-control"
-                                                />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="row">
-                                        <div className="col-md-6">
-                                            <div className="position-relative form-group">
-                                                <label className="">
-                                                    Postal Address
-                                                </label>
-                                                <input
-                                                    defaultValue={
-                                                        this.state.student
-                                                            .postaladress
-                                                    }
-                                                    placeholder=" Postal Address"
-                                                    type="text"
-                                                    className="form-control"
-                                                />
-                                            </div>
-                                        </div>
-                                        <div className="col-md-6">
-                                            <div className="position-relative form-group">
-                                                <label className="">NIC</label>
-                                                <input
-                                                    defaultValue={
-                                                        this.state.student.nic
-                                                    }
-                                                    placeholder="Email"
-                                                    type="text"
-                                                    className="form-control"
-                                                />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
+                                <table
+                                    id="example"
+                                    className="mb-0 table table-striped"
+                                >
+                                    <thead>
+                                        <tr>
+                                            <th>#Digital Id</th>
+                                            <th>Email</th>
+                                            <th>Program Name</th>
+                                            <th>Postal Address</th>
+                                            <th>NIC</th>
+                                            <th>Type Credential</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>{credentialsTable}</tbody>
+                                </table>
                             </ModalBody>
                             <ModalFooter>
                                 <Button color="primary" onClick={this.toggle}>
