@@ -25,7 +25,7 @@ class StudentSidebarLayout extends React.Component {
         return (
             <div>
                 <div className="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
-                    <div className="app-header header-shadow bg-primary header-text-light">
+                    <div className="app-header header-shadow">
                         <div className="app-header__logo">
                             <div
                                 className="logo-src"
