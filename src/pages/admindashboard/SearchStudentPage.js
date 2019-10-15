@@ -201,7 +201,7 @@ class SearchStudentPage extends Component {
                                                     Bith date
                                                 </label>
                                                 <input
-                                                    defaultValue={moment(this.state.student.birthdate, 'mm/dd/yyyy').format()}
+                                                    defaultValue={moment(new Date(this.state.student.birthdate)).format('YYYY-MM-DD')}
                                                     placeholder="mm/dd/yyyy"
                                                     type="date"
                                                     className="form-control"

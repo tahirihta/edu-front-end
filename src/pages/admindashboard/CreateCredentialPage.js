@@ -27,6 +27,7 @@ class CreateCredentialPage extends Component {
     };
 
     UNSAFE_componentWillReceiveProps(nextProps) {
+        console.log(nextProps);
         if(nextProps.student.student.studentid) {
             this.setState({
                 studentId: nextProps.student.student.studentid,
@@ -48,7 +49,6 @@ class CreateCredentialPage extends Component {
                 "studentId": this.state.studentId,
                 "university": this.state.university,
                 "programName": this.state.programName,
-                "email": this.state.email,
                 "attributionDate": this.state.attributionDate,
                 "type_digital_credential": this.state.type_digital_credential
             })
@@ -59,7 +59,8 @@ class CreateCredentialPage extends Component {
                     university: "",
                     programName: "",
                     attributionDate: "",
-                    type_digital_credential: "",
+                    type_digital_credential: "Choose One",
+                    disabled: false
                 })
             })
             .catch(err => toastr.success("Someting wrong! Please check your inputs."));
@@ -69,7 +70,6 @@ class CreateCredentialPage extends Component {
     }
 
     openSearchModal = e => {
-        // this.setState({modalIsOpen: true});
         this.props.setModal({
             createModal: false,
             searchModal: true,
@@ -122,7 +122,7 @@ class CreateCredentialPage extends Component {
                                             <div className="col-md-6">
                                                 <div className="position-relative form-group">
                                                     <label className="">University</label>
-                                                    <input name="university" onChange={this.onChange} required defaultValue={this.state.university} placeholder="University" type="text" className="form-control" />
+                                                    <input name="university" onChange={this.onChange} value={this.state.university} required placeholder="University" type="text" className="form-control" />
                                                 </div>
                                             </div>
                                         </div>
@@ -130,13 +130,13 @@ class CreateCredentialPage extends Component {
                                             <div className="col-md-6">
                                                 <div className="position-relative form-group">
                                                     <label className="">Attribution date</label>
-                                                    <input name="attributionDate" onChange={this.onChange} required defaultValue={this.state.attributionDate} placeholder="dd/mm/yyyy" type="date" className="form-control" />
+                                                    <input name="attributionDate" onChange={this.onChange} value={this.state.attributionDate} required placeholder="dd/mm/yyyy" type="date" className="form-control" />
                                                 </div>
                                             </div>
                                             <div className="col-md-6">
                                                 <div className="position-relative form-group">
                                                     <label className="">Program Name</label>
-                                                    <input name="programName" onChange={this.onChange} required defaultValue={this.state.programName} placeholder="Program Name" type="text" className="form-control" />
+                                                    <input name="programName" onChange={this.onChange} required value={this.state.programName} placeholder="Program Name" type="text" className="form-control" />
                                                 </div>
                                             </div>
                                         </div>
@@ -144,8 +144,8 @@ class CreateCredentialPage extends Component {
                                             <div className="col-md-6">
                                                 <div className="position-relative form-group">
                                                     <label className="">Type Digital Credential</label>
-                                                    <select name="type_digital_credential" onChange={this.onChange} className="form-control">
-                                                        <option defaultValue>Choose One</option>
+                                                    <select name="type_digital_credential" onChange={this.onChange} value={this.state.type_digital_credential} className="form-control">
+                                                        <option value="Choose One">Choose One</option>
                                                         <option value="Diploma">Diploma</option>
                                                         <option value="Certification">Certification</option>
                                                         <option value="Standard">Standard</option>
